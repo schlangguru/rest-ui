@@ -21,14 +21,21 @@ class FXApp: App(MainView::class) {
     init {
         RestServerImpl()
 
-        val responses = mapOf(
-                Pair("eins", MockResourceResponse(200, "text/html", "eins")),
-                Pair("zwei", MockResourceResponse(200, "text/html", "zwei")),
-                Pair("drei", MockResourceResponse(200, "application/json", "{\"key\": \"value\"}"))
-        )
-        val mockResource = MockResource("/mockResource", "GET", SequentialResponseStrategy(), responses)
+        val textMockResource = MockResource("/text", "GET", SequentialResponseStrategy(), mapOf(
+                Pair("main", MockResourceResponse(200, "text/html", "GET ok"))
+        ))
 
-        store.dispatch(AddMockResourceAction(mockResource))
+        val jsonMockResource = MockResource("/json", "GET", SequentialResponseStrategy(), mapOf(
+                Pair("main", MockResourceResponse(200, "application/json", "{\"key\": \"value\"}"))
+        ))
+
+        val postMockResource = MockResource("/post", "POST", SequentialResponseStrategy(), mapOf(
+                Pair("main", MockResourceResponse(200, "text/html", "POST ok"))
+        ))
+
+        store.dispatch(AddMockResourceAction(textMockResource))
+        store.dispatch(AddMockResourceAction(jsonMockResource))
+        store.dispatch(AddMockResourceAction(postMockResource))
     }
 
     override fun stop() {

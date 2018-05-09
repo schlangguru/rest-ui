@@ -26,8 +26,8 @@ class RequestList: View() {
     }
 }
 
-class RequestListCellFragment : ListCellFragment<Request>() {
-    val request = RequestViewModel().bindTo(this)
+class RequestListCellFragment: ListCellFragment<Request>() {
+    private val request = RequestViewModel().bindTo(this)
 
     override val root = hbox {
         label(request.method) {

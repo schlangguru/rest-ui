@@ -1,9 +1,13 @@
 package de.schlangguru.restui.gui.views
 
+import de.schlangguru.restui.app.model.Request
 import de.schlangguru.restui.gui.viewmodels.RequestViewModel
 import de.schlangguru.restui.app.model.RequestHeader
+import de.schlangguru.restui.gui.viewmodels.RequestHeaderViewModel
 import javafx.geometry.Insets
+import javafx.geometry.Orientation
 import javafx.scene.layout.VBox
+import javafx.scene.text.FontWeight
 import tornadofx.*
 
 class RequestDetails : View() {
@@ -21,15 +25,40 @@ class RequestDetails : View() {
                 text(viewModel.path)
             }
 
-            tableview<RequestHeader> {
-                column("Name", RequestHeader::name)
-                column("Value", RequestHeader::value)
+            pane {
+                padding = Insets(3.0)
             }
 
-            textarea(viewModel.entity) {
-                isEditable = false
+            splitpane {
+                orientation = Orientation.VERTICAL
+                setDividerPosition(0, .5)
+
+                listview(viewModel.headers) {
+                    cellFragment(RequestHeaderCellFragment::class)
+                }
+
+                textarea(viewModel.entity) {
+                    isEditable = false
+                }
             }
         }
     }
+}
 
+class RequestHeaderCellFragment: ListCellFragment<RequestHeader>() {
+    private val header = RequestHeaderViewModel().bindTo(this)
+
+    override val root = hbox {
+        label(header.name) {
+            style {
+                fontWeight = FontWeight.BOLD
+            }
+        }
+        label(": ") {
+            style {
+                fontWeight = FontWeight.BOLD
+            }
+        }
+        label(header.value)
+    }
 }
