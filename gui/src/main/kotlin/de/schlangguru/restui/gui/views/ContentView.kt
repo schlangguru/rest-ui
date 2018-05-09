@@ -17,7 +17,7 @@ class ContentView: View() {
             }
             tab("Mock Resources") {
                 isClosable = false
-                add(ActionsView::class)
+                add(MockResourcesView::class)
             }
             tab("Settings") {
                 isClosable = false
