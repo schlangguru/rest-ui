@@ -1,0 +1,5 @@
+rootProject.name = 'REST-UI'
+include 'core'
+include 'app'
+include 'gui'
+

@@ -1,0 +1,10 @@
+group 'de.schlangguru'
+version '1.0-SNAPSHOT'
+
+dependencies {
+    compile project(":core")
+    compile group: 'org.glassfish.jersey.core', name: 'jersey-server', version: '2.27'
+    compile group: 'org.glassfish.jersey.inject', name: 'jersey-hk2', version: '2.27'
+    compile group: 'org.glassfish.jersey.containers', name: 'jersey-container-grizzly2-http', version: '2.27'
+    compile group: 'org.glassfish.jersey.media', name: 'jersey-media-json-jackson', version: '2.27'
+}
