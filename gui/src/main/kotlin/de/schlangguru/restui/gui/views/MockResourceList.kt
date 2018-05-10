@@ -17,9 +17,27 @@ class MockResourceList: View() {
 
     init {
         with (root) {
+            toolbar {
+                pane {
+                    hgrow = Priority.ALWAYS
+                }
+                button{
+                    tooltip("Create New")
+                    imageview("/icons/plus.png")
+                    action { listViewModel.createNewMockResource() }
+                }
+                button {
+                    tooltip("Delete")
+                    imageview("/icons/empty_trash.png")
+                    action { listViewModel.deleteSelectedMockResource() }
+                    enableWhen(listViewModel.selected.isNotNull)
+                }
+            }
+
             listview(listViewModel.mockResources) {
                 cellFragment(MockResourceListCellFragment::class)
                 bindSelected(detailsViewModel)
+                bindSelected(listViewModel.selected)
                 vgrow = Priority.ALWAYS
             }
         }

@@ -17,6 +17,10 @@ class AddMockResourceAction (
         val mockResource: MockResource
 ): Action
 
+class RemoveMockResourceAction (
+        val mockResource: MockResource
+): Action
+
 class UpdateSettingsAction (
         val host: String? = null,
         val port: Int? = null

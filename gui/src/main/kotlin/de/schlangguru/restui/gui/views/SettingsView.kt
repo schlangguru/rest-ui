@@ -24,9 +24,6 @@ class SettingsView: View() {
                     action { viewModel.rollback() }
                     enableWhen(viewModel.dirty)
                 }
-                pane {
-                    prefWidth = 10.0
-                }
                 button {
                     tooltip("Save")
                     imageview("/icons/checkmark.png")

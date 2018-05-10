@@ -1,10 +1,7 @@
 package de.schlangguru.restui.app.reducer
 
 import de.schlangguru.restui.app.AppState
-import de.schlangguru.restui.app.actions.AddRequestAction
-import de.schlangguru.restui.app.actions.AddMockResourceAction
-import de.schlangguru.restui.app.actions.ServerStatusChangedAction
-import de.schlangguru.restui.app.actions.UpdateSettingsAction
+import de.schlangguru.restui.app.actions.*
 
 class Reducer {
 
@@ -28,6 +25,12 @@ class Reducer {
     fun reduce(action: AddMockResourceAction, state: AppState): AppState {
         return state.copy(
                 mockResources = state.mockResources + action.mockResource
+        )
+    }
+
+    fun reduce(action: RemoveMockResourceAction, state: AppState): AppState {
+        return state.copy(
+                mockResources = state.mockResources - action.mockResource
         )
     }
 }
