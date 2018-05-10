@@ -8,7 +8,7 @@ class SequentialResponseStrategy : ResponseStrategy {
 
     private var nextResponseIndex = 0
 
-    override fun provideResponse(request: ContainerRequestContext, availableResponses: Map<String, MockResourceResponse>): MockResourceResponse {
+    override fun provideResponse(request: ContainerRequestContext, availableResponses: List<MockResourceResponse>): MockResourceResponse {
         if (availableResponses.isEmpty()) {
             throw ResponseSelectionException("No responses available")
         }
@@ -17,7 +17,7 @@ class SequentialResponseStrategy : ResponseStrategy {
             nextResponseIndex = 0
         }
 
-        return availableResponses.values.elementAt(nextResponseIndex++)
+        return availableResponses.elementAt(nextResponseIndex++)
     }
 
 }

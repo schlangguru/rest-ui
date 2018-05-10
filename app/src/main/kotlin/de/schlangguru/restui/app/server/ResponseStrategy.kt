@@ -5,6 +5,6 @@ import javax.ws.rs.container.ContainerRequestContext
 
 interface ResponseStrategy {
 
-    fun provideResponse(request: ContainerRequestContext, availableResponses: Map<String, MockResourceResponse>): MockResourceResponse
+    fun provideResponse(request: ContainerRequestContext, availableResponses: List<MockResourceResponse>): MockResourceResponse
 
 }

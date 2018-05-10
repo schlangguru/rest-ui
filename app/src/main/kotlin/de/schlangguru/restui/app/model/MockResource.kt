@@ -6,10 +6,11 @@ data class MockResource (
         val path: String,
         val method: String,
         val responseStrategy: ResponseStrategy,
-        val responses: Map<String, MockResourceResponse>
+        val responses: List<MockResourceResponse>
 )
 
 data class MockResourceResponse (
+        val name: String,
         val statusCode: Int,
         val contentType: String,
         val content: String

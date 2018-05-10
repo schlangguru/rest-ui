@@ -5,7 +5,7 @@ import javax.ws.rs.container.ContainerRequestContext
 
 class ScriptedResponseStrategy : ResponseStrategy {
 
-    override fun provideResponse(request: ContainerRequestContext, availableResponses: Map<String, MockResourceResponse>): MockResourceResponse {
+    override fun provideResponse(request: ContainerRequestContext, availableResponses: List<MockResourceResponse>): MockResourceResponse {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
