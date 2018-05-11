@@ -8,10 +8,10 @@ data class MockResource (
         val path: String,
         val method: String,
         val responseStrategy: ResponseStrategy,
-        val responses: List<MockResourceResponse>
+        val responses: List<MockResponse>
 )
 
-data class MockResourceResponse (
+data class MockResponse (
         val name: String,
         val statusCode: Int,
         val contentType: String,

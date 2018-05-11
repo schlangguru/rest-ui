@@ -1,15 +1,15 @@
 package de.schlangguru.restui.app.server
 
-import de.schlangguru.restui.app.model.MockResourceResponse
+import de.schlangguru.restui.app.model.MockResponse
 import javax.ws.rs.container.ContainerRequestContext
 
 class ScriptedResponseStrategy : ResponseStrategy {
 
-    override fun provideResponse(request: ContainerRequestContext, availableResponses: List<MockResourceResponse>): MockResourceResponse {
+    override fun provideResponse(request: ContainerRequestContext, availableResponses: List<MockResponse>): MockResponse {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-//    override fun provideResponse(request: ContainerRequestContext, availableResponses: Map<String, MockResourceResponse>): MockResourceResponse {
+//    override fun provideResponse(request: ContainerRequestContext, availableResponses: Map<String, MockResponse>): MockResponse {
 //        val objMapper = ObjectMapper()
 //        val nashorn = ScriptEngineManager().getEngineByName("nashorn")
 //

@@ -1,6 +1,6 @@
 package de.schlangguru.restui.gui.views
 
-import de.schlangguru.restui.gui.viewmodels.MockResourceResponseViewModel
+import de.schlangguru.restui.gui.viewmodels.MockResponseViewModel
 import de.schlangguru.restui.gui.viewmodels.MockResourceViewModel
 import javafx.scene.layout.Priority
 import javafx.scene.layout.VBox
@@ -29,10 +29,10 @@ class MockResourceDetails : View() {
 
                 fieldset("Responses") {
                     tableview(viewModel.responses) {
-                        column("Name", MockResourceResponseViewModel::name)
-                        column("Status", MockResourceResponseViewModel::statusCode)
-                        column("Content-Type", MockResourceResponseViewModel::contentType)
-                        column("Entity", MockResourceResponseViewModel::content)
+                        column("Name", MockResponseViewModel::name)
+                        column("Status", MockResponseViewModel::statusCode)
+                        column("Content-Type", MockResponseViewModel::contentType)
+                        column("Entity", MockResponseViewModel::content)
 
                         smartResize()
                         onUserSelect { MockResourceResponseDetails(it).openWindow(stageStyle = StageStyle.UTILITY) }
@@ -44,7 +44,7 @@ class MockResourceDetails : View() {
 }
 
 class MockResourceResponseDetails (
-        private val viewModel: MockResourceResponseViewModel
+        private val viewModel: MockResponseViewModel
 ) : Fragment() {
     override val root = VBox()
 

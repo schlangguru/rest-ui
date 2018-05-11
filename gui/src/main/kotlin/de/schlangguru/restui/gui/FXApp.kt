@@ -4,7 +4,7 @@ import de.schlangguru.restui.app.AppStore
 import de.schlangguru.restui.app.actions.AddMockResourceAction
 import de.schlangguru.restui.app.actions.StopServerAction
 import de.schlangguru.restui.app.model.MockResource
-import de.schlangguru.restui.app.model.MockResourceResponse
+import de.schlangguru.restui.app.model.MockResponse
 import de.schlangguru.restui.app.server.RestServerImpl
 import de.schlangguru.restui.app.server.SequentialResponseStrategy
 import de.schlangguru.restui.gui.views.MainView
@@ -22,16 +22,16 @@ class FXApp: App(MainView::class) {
         RestServerImpl()
 
         val textMockResource = MockResource(path = "/text", method = "GET", responseStrategy = SequentialResponseStrategy(), responses = listOf(
-                MockResourceResponse("main", 200, "text/html", "GET ok"),
-                MockResourceResponse("secondary", 204, "text/html", "")
+                MockResponse("main", 200, "text/html", "GET ok"),
+                MockResponse("secondary", 204, "text/html", "")
         ))
 
         val jsonMockResource = MockResource(path = "/json", method = "GET", responseStrategy = SequentialResponseStrategy(), responses = listOf(
-                MockResourceResponse("main", 200, "application/json", "{\"key\": \"value\"}")
+                MockResponse("main", 200, "application/json", "{\"key\": \"value\"}")
         ))
 
         val postMockResource = MockResource(path = "/post", method =  "POST", responseStrategy = SequentialResponseStrategy(), responses =  listOf(
-                MockResourceResponse("main", 200, "text/html", "POST ok")
+                MockResponse("main", 200, "text/html", "POST ok")
         ))
 
         store.dispatch(AddMockResourceAction(textMockResource))
