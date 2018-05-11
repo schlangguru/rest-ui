@@ -13,13 +13,12 @@ class MockResourceViewModel(
     val mockResourceID = bind (MockResource::id)
     val path = bind (MockResource::path)
     val method = bind (MockResource::method)
-    val responses = bind { SimpleListProperty<MockResponseViewModel>(item?.responses?.map { MockResponseViewModel(item = it) }?.observable()) }
+    val responses = bind { SimpleListProperty<MockResponseViewModel>(item?.responses?.map { MockResponseViewModel(it) }?.observable()) }
 
     val availableMethods = listOf("GET", "POST", "PUT", "DELETE", "HEAD").observable()
 }
 
 class MockResponseViewModel(
-        private val store: AppStore = AppStore,
         item: MockResponse? = null
 ): ItemViewModel<MockResponse>() {
     val name = bind (MockResponse::name)
