@@ -19,7 +19,7 @@ class MockResourceViewModel(
 }
 
 class MockResponseViewModel(
-        item: MockResponse? = null
+        item: MockResponse
 ): ItemViewModel<MockResponse>() {
     val name = bind (MockResponse::name)
     val statusCode = bind (MockResponse::statusCode)
@@ -27,6 +27,6 @@ class MockResponseViewModel(
     val content = bind (MockResponse::content)
 
     init {
-        item?.let { this.item = it }
+        this.item = item
     }
 }
