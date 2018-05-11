@@ -7,4 +7,5 @@ dependencies {
     compile group: 'org.glassfish.jersey.inject', name: 'jersey-hk2', version: '2.27'
     compile group: 'org.glassfish.jersey.containers', name: 'jersey-container-grizzly2-http', version: '2.27'
     compile group: 'org.glassfish.jersey.media', name: 'jersey-media-json-jackson', version: '2.27'
+    compile group: 'no.tornado', name: 'tornadofx', version: '1.7.15'
 }

@@ -1,19 +1,17 @@
 package de.schlangguru.restui.gui.views
 
-import de.schlangguru.restui.app.model.MockResourceResponse
 import de.schlangguru.restui.gui.viewmodels.MockResourceResponseViewModel
 import de.schlangguru.restui.gui.viewmodels.MockResourceViewModel
 import javafx.scene.layout.Priority
 import javafx.scene.layout.VBox
 import javafx.stage.StageStyle
-import javafx.util.converter.NumberStringConverter
+import javafx.util.converter.IntegerStringConverter
 import tornadofx.*
 
 class MockResourceDetails : View() {
     override val root = VBox()
 
     private val viewModel: MockResourceViewModel by inject()
-    private val responseViewModel: MockResourceResponseViewModel by inject()
 
     init {
         with(root) {
@@ -31,14 +29,13 @@ class MockResourceDetails : View() {
 
                 fieldset("Responses") {
                     tableview(viewModel.responses) {
-                        readonlyColumn("Name", MockResourceResponse::name)
-                        readonlyColumn("Status", MockResourceResponse::statusCode)
-                        readonlyColumn("Content-Type", MockResourceResponse::contentType)
-                        readonlyColumn("Entity", MockResourceResponse::content)
+                        column("Name", MockResourceResponseViewModel::name)
+                        column("Status", MockResourceResponseViewModel::statusCode)
+                        column("Content-Type", MockResourceResponseViewModel::contentType)
+                        column("Entity", MockResourceResponseViewModel::content)
 
                         smartResize()
-                        bindSelected(responseViewModel)
-                        onUserSelect { find(MockResourceResponseDetails::class).openModal(stageStyle = StageStyle.UTILITY) }
+                        onUserSelect { MockResourceResponseDetails(it).openWindow(stageStyle = StageStyle.UTILITY) }
                     }
                 }
             }
@@ -46,9 +43,10 @@ class MockResourceDetails : View() {
     }
 }
 
-class MockResourceResponseDetails: Fragment() {
+class MockResourceResponseDetails (
+        private val viewModel: MockResourceResponseViewModel
+) : Fragment() {
     override val root = VBox()
-    private val viewModel: MockResourceResponseViewModel by inject()
 
     init {
         with (root) {
@@ -62,18 +60,12 @@ class MockResourceResponseDetails: Fragment() {
                     action { viewModel.rollback() }
                     enableWhen(viewModel.dirty)
                 }
-                button {
-                    tooltip("Save")
-                    imageview("/icons/checkmark.png")
-                    action { viewModel.commit() }
-                    enableWhen(viewModel.dirty)
-                }
             }
 
             form {
                 fieldset("Response: ${viewModel.name.value}") {
                     field("Status Code:") {
-                        textfield(viewModel.statusCode, NumberStringConverter("#"))
+                        textfield(viewModel.statusCode, IntegerStringConverter())
                     }
                     field("Content Type: ") {
                         textfield(viewModel.contentType)

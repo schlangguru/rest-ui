@@ -1,6 +1,7 @@
 package de.schlangguru.restui.app.actions
 
 import de.schlangguru.restui.app.model.MockResource
+import de.schlangguru.restui.app.model.MockResourceResponse
 import de.schlangguru.restui.app.model.Request
 import de.schlangguru.restui.app.model.ServerStatus
 import de.schlangguru.restui.core.Action
@@ -19,6 +20,11 @@ class AddMockResourceAction (
 
 class RemoveMockResourceAction (
         val mockResource: MockResource
+): Action
+
+class UpdateMockResourceResponseAction (
+        val mockResourceID: String,
+        val response: MockResourceResponse
 ): Action
 
 class UpdateSettingsAction (
