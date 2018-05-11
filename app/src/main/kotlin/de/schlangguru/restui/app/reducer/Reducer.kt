@@ -36,15 +36,11 @@ class Reducer {
     }
 
     // TODO Maybe its better to just update a whole MockResource at once
-    fun reduce(action: UpdateMockResourceResponseAction, state: AppState): AppState {
-//        val mockResources = state.mockResources.mapIf({ it.id == action.mockResourceID }) {
-//            val responses = it.responses.mapIf({ it.name == action.response.name }) {
-//                action.response
-//            }
-//            it.copy(responses = responses)
-//        }
-//
-//        return state.copy(mockResources = mockResources)
-        return state
+    fun reduce(action: UpdateMockResourceAction, state: AppState): AppState {
+        val updatedMockResources = state.mockResources.mapIf({ it.id == action.mockResource.id }) {
+            action.mockResource
+        }
+
+        return state.copy(mockResources = updatedMockResources)
     }
 }

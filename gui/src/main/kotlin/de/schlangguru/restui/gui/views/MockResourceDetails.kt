@@ -15,6 +15,22 @@ class MockResourceDetails : View() {
 
     init {
         with(root) {
+            toolbar {
+                pane {
+                    hgrow = Priority.ALWAYS
+                }
+                button{
+                    tooltip("Reset")
+                    imageview("/icons/checkmark.png")
+                    action { viewModel.commit() }
+                }
+                button{
+                    tooltip("Reset")
+                    imageview("/icons/undo.png")
+                    action { viewModel.rollback() }
+                }
+            }
+
             form {
                 fieldset("Mock Resource") {
                     field("HTTP Method:") {
