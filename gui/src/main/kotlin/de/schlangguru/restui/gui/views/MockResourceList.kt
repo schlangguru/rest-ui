@@ -1,6 +1,7 @@
 package de.schlangguru.restui.gui.views
 
 import de.schlangguru.restui.app.model.MockResource
+import de.schlangguru.restui.gui.bindSelectedIndexBidirectional
 import de.schlangguru.restui.gui.viewmodels.MockResourceListViewModel
 import de.schlangguru.restui.gui.viewmodels.MockResourceViewModel
 import javafx.scene.layout.Priority
@@ -30,14 +31,15 @@ class MockResourceList: View() {
                     tooltip("Delete")
                     imageview("/icons/empty_trash.png")
                     action { listViewModel.deleteSelectedMockResource() }
-                    enableWhen(listViewModel.selected.isNotNull)
+                    enableWhen(listViewModel.selectedItem.isNotNull)
                 }
             }
 
             listview(listViewModel.mockResources) {
                 cellFragment(MockResourceListCellFragment::class)
                 bindSelected(detailsViewModel)
-                bindSelected(listViewModel.selected)
+                bindSelected(listViewModel.selectedItem)
+                bindSelectedIndexBidirectional(listViewModel.selectedIndex)
                 vgrow = Priority.ALWAYS
             }
         }
