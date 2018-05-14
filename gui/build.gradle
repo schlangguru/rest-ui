@@ -4,4 +4,5 @@ version '1.0-SNAPSHOT'
 dependencies {
     compile project(":app")
     compile group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib-jdk8', version: "$kotlin_version"
+    compile group: 'no.tornado', name: 'tornadofx', version: '1.7.15'
 }

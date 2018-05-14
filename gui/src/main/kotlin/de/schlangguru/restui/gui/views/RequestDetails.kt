@@ -1,9 +1,7 @@
 package de.schlangguru.restui.gui.views
 
-import de.schlangguru.restui.app.model.Request
-import de.schlangguru.restui.gui.viewmodels.RequestViewModel
-import de.schlangguru.restui.app.model.RequestHeader
 import de.schlangguru.restui.gui.viewmodels.RequestHeaderViewModel
+import de.schlangguru.restui.gui.viewmodels.RequestViewModel
 import javafx.geometry.Insets
 import javafx.geometry.Orientation
 import javafx.scene.layout.VBox
@@ -23,6 +21,11 @@ class RequestDetails : View() {
                 label("URL: ")
                 text(viewModel.host)
                 text(viewModel.path)
+            }
+
+            hbox {
+                label("Query: ")
+                text(viewModel.query)
             }
 
             pane {
@@ -45,7 +48,7 @@ class RequestDetails : View() {
     }
 }
 
-class RequestHeaderCellFragment: ListCellFragment<RequestHeader>() {
+class RequestHeaderCellFragment: ListCellFragment<Map.Entry<String, String>>() {
     private val header = RequestHeaderViewModel().bindTo(this)
 
     override val root = hbox {

@@ -4,11 +4,7 @@ data class Request (
         val host: String,
         val path: String,
         val method: String,
-        val headers: List<RequestHeader>,
+        val queryParameter: Map<String, String>,
+        val headers: Map<String, String>,
         val entity: String
-)
-
-data class RequestHeader (
-    var name: String,
-    var value: String
 )

@@ -4,7 +4,6 @@ import de.schlangguru.restui.app.AppStore
 import de.schlangguru.restui.app.actions.AddRequestAction
 import de.schlangguru.restui.app.model.MockResource
 import de.schlangguru.restui.app.model.Request
-import de.schlangguru.restui.app.model.RequestHeader
 import org.glassfish.jersey.process.Inflector
 import java.nio.charset.Charset
 import javax.ws.rs.container.ContainerRequestContext
@@ -16,15 +15,17 @@ class RequestHandler(
         private val store: AppStore = AppStore
 ) : Inflector<ContainerRequestContext, Any> {
 
-    override fun apply(request: ContainerRequestContext): Response {
+    override fun apply(containerRequestContext: ContainerRequestContext): Response {
 
-        store.dispatch(AddRequestAction(Request(
-                host = request.uriInfo.baseUri.toString(),
-                path = request.uriInfo.path,
-                method = request.method,
-                headers = request.headers.map { RequestHeader(it.key, it.value.joinToString()) },
-                entity = request.entityStream.readBytes().toString(Charset.defaultCharset())
-        )))
+        val request = Request(
+                host = containerRequestContext.uriInfo.baseUri.toString(),
+                path = containerRequestContext.uriInfo.path,
+                method = containerRequestContext.method,
+                queryParameter = containerRequestContext.uriInfo.queryParameters.mapValues { it.value.joinToString() },
+                headers = containerRequestContext.headers.mapValues { it.value.joinToString() },
+                entity = containerRequestContext.entityStream.readBytes().toString(Charset.defaultCharset())
+        )
+        store.dispatch(AddRequestAction(request))
 
         val actionResponse = mockResource.responseStrategy.provideResponse(request, mockResource.responses)
 

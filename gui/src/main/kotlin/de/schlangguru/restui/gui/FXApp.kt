@@ -6,6 +6,7 @@ import de.schlangguru.restui.app.actions.StopServerAction
 import de.schlangguru.restui.app.model.MockResource
 import de.schlangguru.restui.app.model.MockResponse
 import de.schlangguru.restui.app.server.RestServerImpl
+import de.schlangguru.restui.app.server.ScriptedResponseStrategy
 import de.schlangguru.restui.app.server.SequentialResponseStrategy
 import de.schlangguru.restui.gui.views.MainView
 import javafx.application.Application
@@ -34,9 +35,19 @@ class FXApp: App(MainView::class) {
                 MockResponse("main", 200, "text/html", "POST ok")
         ))
 
+        val script = """
+            print (JSON.stringify(_request))
+            _request.queryParameter["q"]
+        """
+        val scriptedResponseResource = MockResource(path = "/script", method = "GET", responseStrategy = ScriptedResponseStrategy(script), responses = listOf(
+                MockResponse("main", 200, "text/html", "Proudly presented by script."),
+                MockResponse("secondary", 200, "text/html", "Proudly presented by script. (Secondary)")
+        ))
+
         store.dispatch(AddMockResourceAction(textMockResource))
         store.dispatch(AddMockResourceAction(jsonMockResource))
         store.dispatch(AddMockResourceAction(postMockResource))
+        store.dispatch(AddMockResourceAction(scriptedResponseResource))
     }
 
     override fun stop() {

@@ -1,10 +1,10 @@
 package de.schlangguru.restui.app.server
 
 import de.schlangguru.restui.app.model.MockResponse
-import javax.ws.rs.container.ContainerRequestContext
+import de.schlangguru.restui.app.model.Request
 
 interface ResponseStrategy {
 
-    fun provideResponse(request: ContainerRequestContext, availableResponses: List<MockResponse>): MockResponse
+    fun provideResponse(request: Request, availableResponses: List<MockResponse>): MockResponse
 
 }
