@@ -1,35 +1,27 @@
 package de.schlangguru.restui.app.server
 
+import com.google.gson.Gson
 import de.schlangguru.restui.app.model.MockResponse
-import javax.ws.rs.container.ContainerRequestContext
+import de.schlangguru.restui.app.model.Request
+import de.schlangguru.restui.server.ResponseSelectionException
 
-class ScriptedResponseStrategy : ResponseStrategy {
+class ScriptedResponseStrategy (private val script: String): ResponseStrategy {
 
-    override fun provideResponse(request: ContainerRequestContext, availableResponses: List<MockResponse>): MockResponse {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    private val gson = Gson()
+
+    override fun provideResponse(request: Request, availableResponses: List<MockResponse>): MockResponse {
+        val jsVariables = mapOf<String, String>(
+                Pair("_request", gson.toJson(request))
+        )
+        val jsEngine = JsScriptEngine(script, jsVariables)
+        val responseName = jsEngine.invokeScript()
+
+        val response = availableResponses.find { it.name == responseName }
+
+        if (response != null) {
+            return response
+        } else {
+            throw ResponseSelectionException("No matching response found with name $responseName")
+        }
     }
-
-//    override fun provideResponse(request: ContainerRequestContext, availableResponses: Map<String, MockResponse>): MockResponse {
-//        val objMapper = ObjectMapper()
-//        val nashorn = ScriptEngineManager().getEngineByName("nashorn")
-//
-//        nashorn.eval("var dispatch = new Function('_responses', '${action.responseDispatchScript}')")
-//
-//        val responses = objMapper.writeValueAsString(action.responses)
-//        nashorn.eval("dispatch($responses)")
-//
-//        return null
-//    }
-//
-//    private fun printPathParams(request: ContainerRequestContext) {
-//        println(request.uriInfo.pathParameters.getFirst("param"))
-//    }
-//
-//    private fun printHeaders(request: ContainerRequestContext) {
-//        request.headers.forEach({ entry ->
-//            val headerName = entry.key
-//            val headerValue = entry.value.joinToString()
-//            println("$headerName: $headerValue")
-//        })
-//    }
 }
