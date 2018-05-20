@@ -4,6 +4,7 @@ import de.schlangguru.restui.app.AppStore
 import de.schlangguru.restui.app.actions.UpdateMockResourceAction
 import de.schlangguru.restui.app.model.MockResource
 import de.schlangguru.restui.app.model.MockResponse
+import de.schlangguru.restui.app.server.ResponseStrategy
 import de.schlangguru.restui.app.server.ScriptedResponseStrategy
 import de.schlangguru.restui.app.server.SequentialResponseStrategy
 import javafx.beans.property.SimpleListProperty
@@ -61,4 +62,8 @@ class MockResponseViewModel: ItemViewModel<MockResponse>() {
     override fun onCommit() {
         item = MockResponse(name.value, statusCode.value, contentType.value, content.value)
     }
+}
+
+class ResponseStrategyViewModel: ItemViewModel<ResponseStrategy>() {
+
 }

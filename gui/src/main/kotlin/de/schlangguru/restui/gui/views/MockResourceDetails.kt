@@ -3,6 +3,7 @@ package de.schlangguru.restui.gui.views
 import de.schlangguru.restui.app.model.MockResponse
 import de.schlangguru.restui.gui.viewmodels.MockResourceViewModel
 import de.schlangguru.restui.gui.viewmodels.MockResponseViewModel
+import de.schlangguru.restui.gui.viewmodels.ResponseStrategyViewModel
 import javafx.beans.property.Property
 import javafx.scene.layout.Priority
 import javafx.scene.layout.VBox
@@ -51,7 +52,7 @@ class MockResourceDetails : View() {
                         button {
                             tooltip("Edit")
                             imageview("/icons/edit.png")
-                            action { /* TODO */ }
+                            action { find<ResponseStrategyDetails>().openModal(stageStyle = StageStyle.UTILITY) }
                         }
                     }
                 }
@@ -65,7 +66,7 @@ class MockResourceDetails : View() {
 
                         smartResize()
                         bindSelected(responseViewModel)
-                        onUserSelect { find<MockResourceResponseDetails>().openModal(stageStyle = StageStyle.UTILITY) }
+                        onUserSelect { find<MockResponseDetails>().openModal(stageStyle = StageStyle.UTILITY) }
                     }
                 }
             }
@@ -73,10 +74,10 @@ class MockResourceDetails : View() {
     }
 }
 
-class MockResourceResponseDetails: Fragment() {
+class MockResponseDetails: Fragment() {
     override val root = VBox()
     private val viewModel: MockResponseViewModel by inject()
-    private val mockResourceViewModel: MockResourceViewModel by inject() // TODO replace response on commit
+    private val mockResourceViewModel: MockResourceViewModel by inject()
 
     init {
         with (root) {
@@ -121,17 +122,14 @@ class MockResourceResponseDetails: Fragment() {
     }
 }
 
-class ScriptEditor(
-        private val script: Property<String>
-): Fragment() {
+class ResponseStrategyDetails (): Fragment() {
     override val root = VBox()
+    private val viewModel: ResponseStrategyViewModel by inject()
+    private val mockResourceViewModel: MockResourceViewModel by inject()
 
     init {
         with (root) {
-            setPrefSize(480.0, 300.0)
-            textarea(script) {
-                vgrow = Priority.ALWAYS
-            }
+
         }
     }
 }
