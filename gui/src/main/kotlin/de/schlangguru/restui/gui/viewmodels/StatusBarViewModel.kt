@@ -11,10 +11,10 @@ import tornadofx.ItemViewModel
 class StatusBarViewModel(
         store: AppStore = AppStore
 ): ItemViewModel<AppState>(), StateHandler<AppState> {
-    private val TEXT_SERVER_STOPPED = "Server gestoppt"
-    private val TEXT_SERVER_STOPPING = "Server wird gestoppt..."
-    private val TEXT_STERVER_STARTED = "Server gestartet: %s"
-    private val TEXT_SERVER_STARTING = "Server wird gestartet..."
+    private val TEXT_SERVER_STOPPED = "Server stopped"
+    private val TEXT_SERVER_STOPPING = "Server stopping..."
+    private val TEXT_STERVER_STARTED = "Server started: %s"
+    private val TEXT_SERVER_STARTING = "Server starting..."
 
     val statusText = SimpleStringProperty(this, "status_text", "")
 
