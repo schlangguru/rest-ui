@@ -5,6 +5,9 @@ import de.schlangguru.restui.app.reducer.Reducer
 import de.schlangguru.restui.core.Action
 import de.schlangguru.restui.core.Store
 
+/**
+ * Singleton store to be used as main application store.
+ */
 object AppStore: Store<AppState>(
         initialState = AppState()
 ) {

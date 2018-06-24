@@ -17,13 +17,22 @@ import org.glassfish.jersey.server.model.Resource
 import java.io.IOException
 import java.net.URI
 
-
+/**
+ * Standard implementation of the REST server.
+ *
+ * @property store The primary app store.
+ */
 class RestServerImpl (
         private val store: AppStore = AppStore
 ): RestServer, SideEffect, StateHandler<AppState> {
+
+    /** Internally used HTTP Server. */
     private var server: HttpServer? = null
+    /** The server´s host. Default is 'localhost' */
     private var host: String = "localhost"
+    /** The server´s port. Default is '8080' */
     private var port: Int = 8080
+    /** The mocked REST resources of the server. */
     private var mockResources: List<MockResource> = emptyList()
 
     init {
@@ -59,11 +68,17 @@ class RestServerImpl (
         }
     }
 
+    /**
+     * Creates the [ResourceConfig] for the internal server based on the given [mockResources].
+     */
     private fun resourceConfig(mockResources: List<MockResource>): ResourceConfig {
         val config = ResourceConfig()
         mockResources.forEach { action ->
             val resourceBuilder = Resource.builder().path("/")
-            resourceBuilder.addChildResource(action.path).addMethod(action.method).handledBy(RequestHandler(action))
+            resourceBuilder
+                    .addChildResource(action.path)
+                    .addMethod(action.method)
+                    .handledBy(RequestHandler(action))
 
             config.registerResources(resourceBuilder.build())
         }

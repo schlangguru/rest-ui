@@ -5,7 +5,7 @@ import javax.script.ScriptEngineManager
 /**
  * Script engine used to allow responseStrategies based on javaScript.
  *
- * Uses the nashorn engine to invoke a js script.
+ * Uses the "Nashorn" engine to invoke a js script.
  */
 class JsScriptEngine (
         private val userScript: String,
