@@ -72,10 +72,10 @@ class FXApp: App(MainView::class) {
 
     /**
      * Stops and closes the application.
-     * TODO: The REST server will not be stopped properly at the moment (Bcs. async dispathch). Maybe implement a method to dispatch an action synchronously.
      */
     override fun stop() {
-        store.dispatch(StopServerAction())
+        store.dispatchAndWait(StopServerAction())
+        store.shutdown()
         super.stop()
     }
 

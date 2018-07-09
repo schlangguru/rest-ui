@@ -10,11 +10,15 @@ REST UI is a simple application to test REST Clients. With REST UI you can creat
 | ![RequestsView](./screenshots/MockResources.png) | ![RequestsView](./screenshots/Requests.png) |
 
 ## Technology & Architecture
-This little project is an experiment of a new UI architectural style I never worked with before.
-It uses something like a mix of Redux/Flux and MVVM.
+This little project is an experiment for a new UI architectural style I never worked with before.
+It uses something like a mix of Redux/Flux based on [KUnidirectional](https://github.com/CesarValiente/KUnidirectional)
+and MVVM.
 
 // TODO More Info here...
 
 ## Known Issues
-- **Application does not exit correctly:** This is a problem most likely due to an async server stop during application shutdown.
+- ~~**Application does not exit correctly:** This is a problem most likely due to an async server stop during application shutdown.~~
 - **Docs:** KDoc is improvable.  
+
+## Roadmap:
+- **Editor für Responsestrategy:** Currently it´s not yet possible to edit the script for "Scripted Response Strategies". The editor has to be implemented.
