@@ -9,8 +9,11 @@ buildscript {
     }
 }
 
+apply plugin: 'application'
+
 group 'de.schlangguru'
 version '1.0-SNAPSHOT'
+mainClassName = "de.schlangguru.restui.gui.FXAppKt"
 
 allprojects {
     apply plugin: 'kotlin'
@@ -33,3 +36,10 @@ allprojects {
         kotlinOptions.jvmTarget = "1.8"
     }
 }
+
+dependencies {
+    compile project(":core")
+    compile project(":app")
+    compile project(":gui")
+}
+
