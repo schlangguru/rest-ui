@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test
 class ExtensionsTest {
 
     @Test
-    fun mapIf_shouldNotMap() {
+    fun `mapIf - should not map any element`() {
         val mapper = { arg: Int ->  arg + 1 }
         val iterable = listOf(1, 2, 3)
 
@@ -17,7 +17,7 @@ class ExtensionsTest {
     }
 
     @Test
-    fun mapIf_shouldMapAll() {
+    fun `mapIf - should map all elements`() {
         val mapper = { arg: Int ->  arg + 1 }
         val iterable = listOf(1, 2, 3)
 
@@ -27,7 +27,7 @@ class ExtensionsTest {
     }
 
     @Test
-    fun mapIf_shouldMapOnce() {
+    fun `mapIf - should map only 1 element`() {
         val mapper = { arg: Int ->  arg + 1 }
         val iterable = listOf(1, 2, 3)
 

@@ -4,7 +4,6 @@ import de.schlangguru.restui.app.model.MockResponse
 import de.schlangguru.restui.gui.viewmodels.MockResourceViewModel
 import de.schlangguru.restui.gui.viewmodels.MockResponseViewModel
 import de.schlangguru.restui.gui.viewmodels.ResponseStrategyViewModel
-import javafx.beans.property.Property
 import javafx.scene.layout.Priority
 import javafx.scene.layout.VBox
 import javafx.stage.StageStyle
@@ -16,6 +15,7 @@ class MockResourceDetails : View() {
 
     private val viewModel: MockResourceViewModel by inject()
     private val responseViewModel: MockResponseViewModel by inject()
+    private val responseStrategyViewModel: ResponseStrategyViewModel by inject()
 
     init {
         with(root) {
@@ -47,12 +47,11 @@ class MockResourceDetails : View() {
                         }
                     }
                     field ("Response: Strategy") {
-                        imageview(viewModel.responseStrategyIcon)
-                        label(viewModel.responseStrategyName)
+                        label(responseStrategyViewModel.type)
                         button {
                             tooltip("Edit")
                             imageview("/icons/edit.png")
-                            action { find<ResponseStrategyDetails>().openModal(stageStyle = StageStyle.UTILITY) }
+                            action { find<ScriptedResponseStrategyEditor>().openModal(stageStyle = StageStyle.UTILITY) }
                         }
                     }
                 }
@@ -122,14 +121,46 @@ class MockResponseDetails: Fragment() {
     }
 }
 
-class ResponseStrategyDetails (): Fragment() {
+class ScriptedResponseStrategyEditor: Fragment() {
     override val root = VBox()
     private val viewModel: ResponseStrategyViewModel by inject()
     private val mockResourceViewModel: MockResourceViewModel by inject()
 
     init {
         with (root) {
-
+            toolbar {
+                pane {
+                    hgrow = Priority.ALWAYS
+                }
+                button {
+                    tooltip("Save")
+                    imageview("/icons/checkmark.png")
+                    action {
+                        viewModel.commit {
+                            mockResourceViewModel.responseStrategy.value = viewModel.item
+                            close()
+                        }
+                    }
+                    enableWhen(viewModel.dirty)
+                }
+                button {
+                    tooltip("Reset")
+                    imageview("/icons/undo.png")
+                    action { viewModel.rollback() }
+                    enableWhen(viewModel.dirty)
+                }
+            }
+            form {
+                fieldset {
+                    field("Type:") {
+                        combobox(viewModel.type, viewModel.availableTypes)
+                    }
+                    field("Script:") {
+                        textarea(viewModel.script)
+                        visibleWhen { viewModel.isEditable }
+                    }
+                }
+            }
         }
     }
 }
