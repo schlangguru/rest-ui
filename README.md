@@ -1,4 +1,4 @@
-# REST UI
+# REST UI ![Travis CI - Status](https://travis-ci.org/Schlangguru/rest-ui.svg?branch=master)
 > REST UI is "Work in Progress"
 
 REST UI is a simple application to test REST Clients. With REST UI you can create mocked REST APIs and easily review the incoming requests.
@@ -18,7 +18,7 @@ and MVVM.
 
 ## Known Issues
 - ~~**Application does not exit correctly:** This is a problem most likely due to an async server stop during application shutdown.~~
-- **Docs:** KDoc is improvable.  
+- **Docs:** KDoc is improvable.
 
 ## Roadmap:
 - **Editor für Responsestrategy:** Currently it´s not yet possible to edit the script for "Scripted Response Strategies". The editor has to be implemented.
