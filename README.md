@@ -1,7 +1,8 @@
 # REST UI ![Travis CI - Status](https://travis-ci.org/Schlangguru/rest-ui.svg?branch=master)
 > REST UI is "Work in Progress"
 
-REST UI is a simple application to test REST Clients. With REST UI you can create mocked REST APIs and easily review the incoming requests.
+REST UI is a simple application to test REST Clients.
+With REST UI you can create mocked REST APIs and easily review the incoming requests.
 
 ## Screenshots:
 
@@ -9,16 +10,29 @@ REST UI is a simple application to test REST Clients. With REST UI you can creat
 | --- | --- |
 | ![RequestsView](./screenshots/MockResources.png) | ![RequestsView](./screenshots/Requests.png) |
 
+## How to build
+```
+# Just run it
+./gradlew run
+
+# Build and run it
+./gradlew build
+cd build/distributions
+unzip REST-UI-<version>.zip
+./REST-UI-<version>/bin/REST-UI
+```
+
+
 ## Technology & Architecture
 This little project is an experiment for a new UI architectural style I never worked with before.
-It uses something like a mix of Redux/Flux based on [KUnidirectional](https://github.com/CesarValiente/KUnidirectional)
-and MVVM.
+The architecture combines traditional MVVM with the ideas of Redux for unidirectional dataflow.
 
-// TODO More Info here...
+The UI is based on the awesome [TornadoFX](https://github.com/edvin/tornadofx) framework.
 
 ## Known Issues
 - ~~**Application does not exit correctly:** This is a problem most likely due to an async server stop during application shutdown.~~
 - **Docs:** KDoc is improvable.
 
 ## Roadmap:
+- **Make it possible to add new mock resources**
 - **Editor für Responsestrategy:** Currently it´s not yet possible to edit the script for "Scripted Response Strategies". The editor has to be implemented.
