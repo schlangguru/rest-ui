@@ -40,6 +40,9 @@ class SettingsView: View() {
                     field("Port: ") {
                         textfield(viewModel.serverPort, NumberStringConverter("#"))
                     }
+                    field("Theme: ") {
+                        checkbox("Use Dark Theme", viewModel.useDarkTheme)
+                    }
                 }
             }
         }

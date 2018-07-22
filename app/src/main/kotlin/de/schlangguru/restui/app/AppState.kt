@@ -11,6 +11,7 @@ data class AppState (
         val serverStatus: ServerStatus = ServerStatus.Stopped,
         val host: String = "localhost",
         val port: Int = 7777,
+        val useDarkTheme: Boolean = false,
 
         /** Stores all received requests. */
         val requestInbox: List<Request> = emptyList(),

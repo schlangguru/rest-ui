@@ -8,6 +8,7 @@ import de.schlangguru.restui.app.model.MockResponse
 import de.schlangguru.restui.app.server.RestServerImpl
 import de.schlangguru.restui.app.server.ScriptedResponseStrategy
 import de.schlangguru.restui.app.server.SequentialResponseStrategy
+import de.schlangguru.restui.gui.sideeffects.ThemeSideEffect
 import de.schlangguru.restui.gui.views.MainView
 import javafx.application.Application
 import tornadofx.App
@@ -26,6 +27,7 @@ class FXApp: App(MainView::class) {
     private val store = AppStore
 
     init {
+        store.register(ThemeSideEffect())
         initRestServer()
         initTestData()
     }

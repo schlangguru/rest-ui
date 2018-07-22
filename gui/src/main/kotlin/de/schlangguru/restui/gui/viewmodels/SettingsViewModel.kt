@@ -5,10 +5,10 @@ import de.schlangguru.restui.app.AppStore
 import de.schlangguru.restui.app.actions.UpdateSettingsAction
 import de.schlangguru.restui.core.StateHandler
 import javafx.application.Platform
+import javafx.beans.property.SimpleBooleanProperty
 import javafx.beans.property.SimpleIntegerProperty
 import javafx.beans.property.SimpleStringProperty
 import tornadofx.ItemViewModel
-import tornadofx.ge
 import tornadofx.toProperty
 
 class SettingsViewModel (
@@ -16,6 +16,7 @@ class SettingsViewModel (
 ): ItemViewModel<AppState>(), StateHandler<AppState> {
     val serverHost: SimpleStringProperty = bind { item?.host.toProperty() }
     val serverPort: SimpleIntegerProperty = bind { SimpleIntegerProperty(item?.port ?: 0) }
+    val useDarkTheme: SimpleBooleanProperty = bind { item?.useDarkTheme.toProperty() }
 
     init {
         store.register(this)
@@ -28,6 +29,6 @@ class SettingsViewModel (
     }
 
     override fun onCommit() {
-        store.dispatch(UpdateSettingsAction(serverHost.get(), serverPort.get()))
+        store.dispatch(UpdateSettingsAction(serverHost.value, serverPort.value, useDarkTheme.value))
     }
 }

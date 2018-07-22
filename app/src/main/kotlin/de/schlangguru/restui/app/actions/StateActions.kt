@@ -27,5 +27,6 @@ class UpdateMockResourceAction (
 
 class UpdateSettingsAction (
         val host: String? = null,
-        val port: Int? = null
+        val port: Int? = null,
+        val useDarkTheme: Boolean? = null
 ): Action

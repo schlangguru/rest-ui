@@ -13,7 +13,8 @@ class Reducer {
     fun reduce(action: UpdateSettingsAction, state: AppState): AppState {
         return state.copy(
                 host = action.host ?: state.host,
-                port = action.port ?: state.port
+                port = action.port ?: state.port,
+                useDarkTheme = action.useDarkTheme ?: state.useDarkTheme
         )
     }
 
