@@ -58,7 +58,7 @@ class MockResourceViewModel(
                 mockResourceID.value,
                 path.value,
                 method.value,
-                SequentialResponseStrategy(), //TODO
+                responseStrategyViewModel.item,
                 responses.value
         )))
     }
@@ -112,7 +112,7 @@ class ResponseStrategyViewModel: ItemViewModel<ResponseStrategy>() {
     }
 
     override fun onCommit() {
-        item = when (type) {
+        item = when (type.value) {
             ResponseStrategyType.Scripted -> ScriptedResponseStrategy(script.value)
             else -> SequentialResponseStrategy()
         }
