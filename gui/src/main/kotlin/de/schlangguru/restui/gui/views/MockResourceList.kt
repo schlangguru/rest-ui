@@ -67,6 +67,7 @@ class NewMockResourceDialog : Fragment() {
     private val viewModel: NewMockResourceDialogViewModel by inject()
 
     init {
+        title = "New Mock Resource"
         with(root) {
             form {
                 fieldset {

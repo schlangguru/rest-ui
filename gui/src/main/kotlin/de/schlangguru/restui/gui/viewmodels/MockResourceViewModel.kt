@@ -33,7 +33,7 @@ class MockResourceViewModel(
     val availableMethods = listOf("GET", "POST", "PUT", "DELETE", "HEAD").observable()
 
     init {
-        responseStrategy.onChange { responseStrategyViewModel.item = it }
+        itemProperty.onChange { responseStrategyViewModel.item = it?.responseStrategy }
         responseStrategyViewModel.type.onChange { responseStrategyTypeChanged(it) }
     }
 
