@@ -10,9 +10,11 @@ import de.schlangguru.restui.server.ResponseSelectionException
  *
  * @property script The user-script on which this strategy relies on.
  */
-class ScriptedResponseStrategy (val script: String): ResponseStrategy {
+class ScriptedResponseStrategy (val script: String = ""): ResponseStrategy {
 
+    @Transient
     private val gson = Gson()
+    @Transient
     private val REQUEST_VARIABLE_NAME = "_request"
 
     /**

@@ -2,15 +2,14 @@ package de.schlangguru.restui.gui.viewmodels
 
 import de.schlangguru.restui.app.AppState
 import de.schlangguru.restui.app.AppStore
-import de.schlangguru.restui.app.actions.ServerStatusChangedAction
-import de.schlangguru.restui.app.actions.StartServerAction
-import de.schlangguru.restui.app.actions.StopServerAction
+import de.schlangguru.restui.app.actions.*
 import de.schlangguru.restui.app.model.ServerStatus
 import de.schlangguru.restui.core.StateHandler
 import javafx.application.Platform
 import javafx.beans.property.SimpleBooleanProperty
 import javafx.beans.property.SimpleStringProperty
 import tornadofx.ItemViewModel
+import java.io.File
 
 class MainMenuViewModel(
         private val store: AppStore = AppStore
@@ -59,5 +58,13 @@ class MainMenuViewModel(
             }
             else -> { /* TODO Error Message in AppState? */ }
         }
+    }
+
+    fun saveConfiguration(selectedFile: File) {
+        store.dispatch(SaveStateAction(selectedFile.absolutePath))
+    }
+
+    fun loadConfiguration(file: File) {
+        store.dispatch(LoadStateAction(file.absolutePath))
     }
 }

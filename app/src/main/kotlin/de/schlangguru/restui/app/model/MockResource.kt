@@ -1,6 +1,7 @@
 package de.schlangguru.restui.app.model
 
 import de.schlangguru.restui.app.server.ResponseStrategy
+import de.schlangguru.restui.app.server.SequentialResponseStrategy
 import java.util.*
 
 /**
@@ -10,13 +11,13 @@ import java.util.*
 data class MockResource (
         val id: String = UUID.randomUUID().toString(),
         /** The path to the resource. */
-        val path: String,
+        val path: String = "/",
         /** The HTTP method of the resource. */
-        val method: String,
+        val method: String = "GET",
         /** The used [ResponseStrategy] to determine the response. */
-        val responseStrategy: ResponseStrategy,
+        val responseStrategy: ResponseStrategy = SequentialResponseStrategy(),
         /** The available responses for this resource. */
-        val responses: List<MockResponse>
+        val responses: List<MockResponse> = emptyList()
 )
 
 /**
@@ -24,11 +25,11 @@ data class MockResource (
  */
 data class MockResponse (
         /** The name of the response. */
-        val name: String,
+        val name: String = "main",
         /** The HTTP status code. */
-        val statusCode: Int,
+        val statusCode: Int = 200,
         /** The contentType header field. */
-        val contentType: String,
+        val contentType: String = "text/html",
         /** The response entity. */
-        val content: String
+        val content: String = ""
 )

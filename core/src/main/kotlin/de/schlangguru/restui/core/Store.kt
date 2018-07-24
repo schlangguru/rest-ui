@@ -12,6 +12,13 @@ abstract class Store<T>(
     private var currentState = initialState
 
     /**
+     * Returns the current state of the store.
+     */
+    fun currentState(): T {
+        return currentState
+    }
+
+    /**
      * Registers a new [SideEffect] to handle
      * [Action] side effects.
      */

@@ -30,3 +30,7 @@ class UpdateSettingsAction (
         val port: Int? = null,
         val useDarkTheme: Boolean? = null
 ): Action
+
+class LoadStateAction (
+        val filePath: String
+) : Action

@@ -1,8 +1,11 @@
 package de.schlangguru.restui.app.reducer
 
+import com.google.gson.Gson
+import com.thoughtworks.xstream.XStream
 import de.schlangguru.restui.app.AppState
 import de.schlangguru.restui.app.actions.*
 import de.schlangguru.restui.core.mapIf
+import java.io.File
 
 class Reducer {
 
@@ -36,7 +39,11 @@ class Reducer {
         )
     }
 
-    // TODO Maybe its better to just update a whole MockResource at once
+    fun reduce(action: LoadStateAction, state: AppState): AppState {
+        val serializedState = File(action.filePath).readText()
+        return XStream().fromXML(serializedState) as AppState
+    }
+
     fun reduce(action: UpdateMockResourceAction, state: AppState): AppState {
         val updatedMockResources = state.mockResources.mapIf({ it.id == action.mockResource.id }) {
             action.mockResource
