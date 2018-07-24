@@ -1,8 +1,10 @@
 package de.schlangguru.restui.gui.views
 
 import de.schlangguru.restui.app.model.MockResponse
-import de.schlangguru.restui.gui.codeArea
+import de.schlangguru.restui.gui.FXApp
+import de.schlangguru.restui.gui.codeEditor
 import de.schlangguru.restui.gui.prompt
+import de.schlangguru.restui.gui.uiComponents.CodeEditor
 import de.schlangguru.restui.gui.viewmodels.MockResourceViewModel
 import de.schlangguru.restui.gui.viewmodels.MockResponseViewModel
 import de.schlangguru.restui.gui.viewmodels.ResponseStrategyViewModel
@@ -139,7 +141,7 @@ class MockResponseDetails: Fragment() {
                         textfield(viewModel.contentType)
                     }
                     field("Entity: ") {
-                        codeArea(viewModel.content)
+                        codeEditor(viewModel.content)
                     }
                 }
             }
@@ -182,10 +184,25 @@ class ResponseStrategyEditor: Fragment() {
                     field("Type:") {
                         combobox(viewModel.type, viewModel.availableTypes)
                     }
-                    field("Script:") {
-                        codeArea(viewModel.script)
-                        visibleWhen { viewModel.isEditable }
+                }
+                vbox {
+                    visibleWhen { viewModel.isEditable }
+                    toolbar {
+                        label("Script:")
+                        pane { hgrow = Priority.ALWAYS }
+                        button {
+                            tooltip("Help")
+                            imageview("/icons/undo.png")
+                            action {
+                                dialog {
+                                    webview {
+                                        engine.load(FXApp::class.java.getResource("/codeEditor/help.html").toExternalForm())
+                                    }
+                                }
+                            }
+                        }
                     }
+                    codeEditor(viewModel.script)
                 }
             }
         }

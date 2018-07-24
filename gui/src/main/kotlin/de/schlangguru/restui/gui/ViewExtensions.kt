@@ -1,24 +1,16 @@
 package de.schlangguru.restui.gui
 
+import de.schlangguru.restui.gui.uiComponents.CodeEditor
 import javafx.beans.property.IntegerProperty
 import javafx.beans.property.Property
-import javafx.beans.property.SimpleStringProperty
-import javafx.beans.property.StringProperty
 import javafx.collections.FXCollections
-import javafx.event.EventTarget
-import javafx.scene.Node
-import javafx.scene.control.Alert
-import javafx.scene.control.ButtonType
 import javafx.scene.control.ListView
 import javafx.scene.control.TextInputDialog
 import javafx.scene.layout.Pane
-import javafx.scene.layout.Priority
-import javafx.scene.layout.VBox
 import javafx.stage.Window
-import org.fxmisc.richtext.CodeArea
-import org.fxmisc.richtext.LineNumberFactory
-import tornadofx.*
-import java.util.logging.Level
+import tornadofx.FX
+import tornadofx.add
+import tornadofx.onChange
 
 fun <T> ListView<T>.bindSelectedIndexBidirectional(property: IntegerProperty) {
     selectionModel.selectedIndexProperty().onChange {
@@ -40,18 +32,11 @@ fun removeStylesheet(stylesheet: String) {
 }
 
 /**
- * Allows to attach a [CodeArea] to a [Pane] with the TornadoFX Builder style.
- * The text of the codeArea is bound to the given [textProperty]. Use the [setup] block
- * to initialize the codeArea to your needs.
+ * Allows to attach a [CodeEditor] to a [Pane] with the TornadoFX Builder style.
+ * The text of the codeEditor is bound to the given [textProperty].
  */
-fun Pane.codeArea(textProperty: Property<String>, setup: CodeArea.() -> Unit = {}) {
-    val codeArea = CodeArea()
-    with (codeArea) {
-        setParagraphGraphicFactory(LineNumberFactory.get(codeArea))
-        replaceText(0, 0, textProperty.value ?: "")
-        this.textProperty().onChange { textProperty.value = it }
-    }
-    codeArea.setup()
+fun Pane.codeEditor(textProperty: Property<String>) {
+    val codeArea = CodeEditor(textProperty)
     add(codeArea)
 }
 

@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head>
+    <link rel="stylesheet" href="lib/codemirror.css">
+    <script src="lib/codemirror.js"></script>
+    <script src="lib/mode_javascript.js"></script>
+</head>
+<body>
+<form>
+    <textarea id="code" name="code"></textarea></form>
+<script>
+    var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+        lineNumbers: true,
+        matchBrackets: true,
+        mode: "text/javascript"
+    });
+
+    editor.on("change", editor => {
+       _fxTextPropertyBridge.setValue(editor.getValue());
+    });
+</script>
+</body>
+</html>

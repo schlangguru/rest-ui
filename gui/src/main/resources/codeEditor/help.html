@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="lib/bootstrap.min.css">
+
+    <title>Hello, world!</title>
+</head>
+<body>
+
+<h1>Access the request</h1>
+You can access the incoming request with the <code>_request</code> object. The <code>_request</code> object is a json
+object in the form:
+<pre>
+{
+    "host": "http://localhost:7777/",
+    "path": "myPath",
+    "method": "POST",
+    "queryParameter": {
+        "param1": "hello",
+        "param2": "world"
+    },
+    "headers": {
+        "host": "localhost:7777",
+        "user-agent": "Mozilla/5.0",
+        ...
+    },
+    "entity": "POST entity goes here"
+}
+</pre>
+
+<h1>Print to stdout</h1>
+You can print to the console (stdout) with the <code>print(obj)</code> funciton.
+
+<h1>Example</h1>
+<pre>
+// Print the incoming request to stdout
+print (JSON.stringify(_request))
+
+// Read the query parameter with the name "q"
+const queryParam = _request.queryParameter["q"]
+
+// Decide which response to use
+if (queryParam == "useMainResponse") {
+    // Tell the engine to use response with name "first"
+    return "first"
+} else {
+    // Tell the engine to use response with name "second"
+    return "second"
+}
+</pre>
+
+</body>
+</html>
+
+

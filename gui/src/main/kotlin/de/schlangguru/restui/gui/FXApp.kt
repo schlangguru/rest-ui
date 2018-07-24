@@ -60,7 +60,7 @@ class FXApp: App(MainView::class) {
         val script = """
                 print (JSON.stringify(_request))
                 _request.queryParameter["q"]
-            """
+            """.trimMargin().trimIndent()
         val scriptedResponseResource = MockResource(path = "/script", method = "GET", responseStrategy = ScriptedResponseStrategy(script), responses = listOf(
                 MockResponse("main", 200, "text/html", "Proudly presented by script."),
                 MockResponse("secondary", 200, "text/html", "Proudly presented by script. (Secondary)")
