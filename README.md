@@ -34,8 +34,5 @@ The UI is based on the awesome [TornadoFX](https://github.com/edvin/tornadofx) f
 - **Docs:** KDoc is improvable.
 
 ## Roadmap:
-- [ ] Make it possible to add new mock responses
-- [ ] Implement save/load configuration
-- [ ] Allow files as response entity
-- [ ] Add help for the scripted response strategy
-- [ ] Allow HTTPS
+- **Make it possible to add new mock resources**
+- **Editor für Responsestrategy:** Currently it´s not yet possible to edit the script for "Scripted Response Strategies". The editor has to be implemented.

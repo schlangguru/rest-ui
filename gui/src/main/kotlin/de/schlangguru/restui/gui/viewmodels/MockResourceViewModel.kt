@@ -7,6 +7,7 @@ import de.schlangguru.restui.app.model.MockResponse
 import de.schlangguru.restui.app.server.ResponseStrategy
 import de.schlangguru.restui.app.server.ScriptedResponseStrategy
 import de.schlangguru.restui.app.server.SequentialResponseStrategy
+import de.schlangguru.restui.gui.observableList
 import javafx.beans.property.SimpleBooleanProperty
 import javafx.beans.property.SimpleListProperty
 import javafx.beans.property.SimpleObjectProperty
@@ -25,7 +26,8 @@ class MockResourceViewModel(
     val responseStrategy = bind (MockResource::responseStrategy)
     val path = bind (MockResource::path)
     val method = bind (MockResource::method)
-    val responses = bind { SimpleListProperty<MockResponse>(item?.responses?.observable()) }
+    val responses = bind { SimpleListProperty<MockResponse>(observableList<MockResponse>(item?.responses)) }
+    val selectedResponse = bind { SimpleObjectProperty<MockResponse>() }
 
     /** The ViewModel for the [ResponseStrategy] Details of the [MockResource]. Will be updated by this viewmodel. */
     private val responseStrategyViewModel: ResponseStrategyViewModel by inject()
@@ -50,6 +52,30 @@ class MockResourceViewModel(
     }
 
     /**
+     * Removes the selected response of the table from the
+     * responses of this mock [MockResource]
+     */
+    fun removeSelectedResponse() {
+        val responseToRemove = selectedResponse.value
+        responses.value.remove(responseToRemove)
+    }
+
+    /**
+     * Replaces the response on [index] with the given [response].
+     */
+    fun replaceResponse(index: Int, response: MockResponse) {
+        responses.value[index] = response
+    }
+
+    /**
+     * Adds a new default response with the given [name].
+     */
+    fun addResponse(name: String) {
+        val responseToAdd = MockResponse(name, 200, "text/html", "")
+        responses.value.add(responseToAdd)
+    }
+
+    /**
      * Dispatches a [UpdateMockResourceAction] to update the
      * currently viewed [MockResource] in the [AppStore].
      */
@@ -62,6 +88,7 @@ class MockResourceViewModel(
                 responses.value
         )))
     }
+
 }
 
 /**

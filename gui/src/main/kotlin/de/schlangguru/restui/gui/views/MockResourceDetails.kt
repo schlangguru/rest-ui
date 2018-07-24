@@ -2,6 +2,7 @@ package de.schlangguru.restui.gui.views
 
 import de.schlangguru.restui.app.model.MockResponse
 import de.schlangguru.restui.gui.codeArea
+import de.schlangguru.restui.gui.prompt
 import de.schlangguru.restui.gui.viewmodels.MockResourceViewModel
 import de.schlangguru.restui.gui.viewmodels.MockResponseViewModel
 import de.schlangguru.restui.gui.viewmodels.ResponseStrategyViewModel
@@ -9,10 +10,8 @@ import javafx.scene.layout.Priority
 import javafx.scene.layout.VBox
 import javafx.stage.StageStyle
 import javafx.util.converter.IntegerStringConverter
-import org.fxmisc.richtext.CodeArea
-import org.fxmisc.richtext.LineNumberFactory
 import tornadofx.*
-import java.time.Duration
+
 
 class MockResourceDetails : View() {
     override val root = VBox()
@@ -61,6 +60,27 @@ class MockResourceDetails : View() {
                 }
 
                 fieldset("Responses") {
+                    toolbar {
+                        pane {
+                            hgrow = Priority.ALWAYS
+                        }
+                        button{
+                            tooltip("Delete")
+                            imageview("/icons/empty_trash.png")
+                            action {
+                                viewModel.removeSelectedResponse()
+                            }
+                        }
+                        button{
+                            tooltip("Add")
+                            imageview("/icons/plus.png")
+                            action {
+                                prompt("${viewModel.path.value}", "Add Response", "Name:") {
+                                    viewModel.addResponse(it)
+                                }
+                            }
+                        }
+                    }
                     tableview(viewModel.responses) {
                         readonlyColumn("Name", MockResponse::name)
                         readonlyColumn("Status", MockResponse::statusCode)
@@ -69,6 +89,7 @@ class MockResourceDetails : View() {
 
                         smartResize()
                         bindSelected(responseViewModel)
+                        bindSelected(viewModel.selectedResponse)
                         onUserSelect { find<MockResponseDetails>().openModal(stageStyle = StageStyle.UTILITY) }
                     }
                 }
@@ -95,7 +116,7 @@ class MockResponseDetails: Fragment() {
                     action {
                         val index = mockResourceViewModel.responses.value.indexOf(viewModel.item)
                         viewModel.commit {
-                            mockResourceViewModel.responses.value[index] = viewModel.item
+                            mockResourceViewModel.replaceResponse(index, viewModel.item)
                             close()
                         }
                     }
@@ -161,10 +182,6 @@ class ScriptedResponseStrategyEditor: Fragment() {
                     field("Type:") {
                         combobox(viewModel.type, viewModel.availableTypes)
                     }
-//                    field("Script:") {
-//                        textarea(viewModel.script)
-//                        visibleWhen { viewModel.isEditable }
-//                    }
                     field("Script:") {
                         codeArea(viewModel.script)
                         visibleWhen { viewModel.isEditable }
