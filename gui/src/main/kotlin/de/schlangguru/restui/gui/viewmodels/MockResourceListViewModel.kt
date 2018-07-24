@@ -8,13 +8,12 @@ import de.schlangguru.restui.app.model.MockResource
 import de.schlangguru.restui.app.model.MockResponse
 import de.schlangguru.restui.app.server.SequentialResponseStrategy
 import de.schlangguru.restui.core.StateHandler
+import de.schlangguru.restui.gui.observableList
 import javafx.application.Platform
 import javafx.beans.property.ReadOnlyListWrapper
 import javafx.beans.property.SimpleIntegerProperty
 import javafx.beans.property.SimpleObjectProperty
-import javafx.beans.property.SimpleStringProperty
 import tornadofx.ItemViewModel
-import tornadofx.ViewModel
 import tornadofx.observable
 
 class MockResourceListViewModel(
@@ -41,15 +40,9 @@ class MockResourceListViewModel(
             store.dispatch(RemoveMockResourceAction(it))
         }
     }
-}
 
-class NewMockResourceDialogViewModel(
-        private val store: AppStore = AppStore
-): ViewModel() {
-    val path = bind { SimpleStringProperty() }
-
-    override fun onCommit() {
-        var path = this.path.value
+    fun addMockResource(path: String) {
+        var path = path
         if (!path.startsWith("/")) {
             path = "/$path"
         }
@@ -57,5 +50,4 @@ class NewMockResourceDialogViewModel(
         val resource = MockResource(path = path, method = "GET", responseStrategy = SequentialResponseStrategy(), responses = emptyList<MockResponse>())
         store.dispatch(AddMockResourceAction(resource))
     }
-
 }

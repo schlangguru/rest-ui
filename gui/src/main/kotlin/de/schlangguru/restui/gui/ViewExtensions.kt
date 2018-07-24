@@ -48,7 +48,7 @@ fun Pane.codeArea(textProperty: Property<String>, setup: CodeArea.() -> Unit = {
     val codeArea = CodeArea()
     with (codeArea) {
         setParagraphGraphicFactory(LineNumberFactory.get(codeArea))
-        replaceText(0, 0, textProperty.value)
+        replaceText(0, 0, textProperty.value ?: "")
         this.textProperty().onChange { textProperty.value = it }
     }
     codeArea.setup()

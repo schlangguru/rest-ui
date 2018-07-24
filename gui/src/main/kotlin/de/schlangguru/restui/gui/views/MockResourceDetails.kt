@@ -54,7 +54,7 @@ class MockResourceDetails : View() {
                         button {
                             tooltip("Edit")
                             imageview("/icons/edit.png")
-                            action { find<ScriptedResponseStrategyEditor>().openModal(stageStyle = StageStyle.UTILITY) }
+                            action { find<ResponseStrategyEditor>().openModal(stageStyle = StageStyle.UTILITY) }
                         }
                     }
                 }
@@ -147,7 +147,7 @@ class MockResponseDetails: Fragment() {
     }
 }
 
-class ScriptedResponseStrategyEditor: Fragment() {
+class ResponseStrategyEditor: Fragment() {
     override val root = VBox()
     private val viewModel: ResponseStrategyViewModel by inject()
     private val mockResourceViewModel: MockResourceViewModel by inject()

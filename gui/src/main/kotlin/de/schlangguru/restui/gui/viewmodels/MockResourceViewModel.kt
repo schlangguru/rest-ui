@@ -1,5 +1,6 @@
 package de.schlangguru.restui.gui.viewmodels
 
+import com.sun.org.apache.xpath.internal.operations.Bool
 import de.schlangguru.restui.app.AppStore
 import de.schlangguru.restui.app.actions.UpdateMockResourceAction
 import de.schlangguru.restui.app.model.MockResource
@@ -112,9 +113,15 @@ class ResponseStrategyViewModel: ItemViewModel<ResponseStrategy>() {
 
     val type = bind { computeTypeProperty(item) }
     val script = bind { computeScriptProperty(item) }
-    val isEditable =  bind { computeIsEditableProperty(item) }
+    val isEditable =  SimpleBooleanProperty(false)
 
     val availableTypes = listOf(ResponseStrategyType.Sequential , ResponseStrategyType.Scripted)
+
+    init {
+        type.onChange {
+            isEditable.value = computeIsEditableProperty(it)
+        }
+    }
 
     private fun computeTypeProperty(responseStrategy: ResponseStrategy?): SimpleObjectProperty<ResponseStrategyType> {
         return when (responseStrategy) {
@@ -131,10 +138,10 @@ class ResponseStrategyViewModel: ItemViewModel<ResponseStrategy>() {
         }
     }
 
-    private fun computeIsEditableProperty(responseStrategy: ResponseStrategy?): SimpleBooleanProperty {
-        return when (responseStrategy) {
-            is ScriptedResponseStrategy -> SimpleBooleanProperty(true)
-            else -> SimpleBooleanProperty(false)
+    private fun computeIsEditableProperty(type: ResponseStrategyType?): Boolean {
+        return when (type) {
+            ResponseStrategyType.Scripted -> true
+            else -> false
         }
     }
 
