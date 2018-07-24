@@ -192,7 +192,7 @@ class ResponseStrategyEditor: Fragment() {
                         pane { hgrow = Priority.ALWAYS }
                         button {
                             tooltip("Help")
-                            imageview("/icons/undo.png")
+                            imageview("/icons/about.png")
                             action {
                                 dialog {
                                     webview {
