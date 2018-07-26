@@ -35,9 +35,10 @@ fun removeStylesheet(stylesheet: String) {
  * Allows to attach a [CodeEditor] to a [Pane] with the TornadoFX Builder style.
  * The text of the codeEditor is bound to the given [textProperty].
  */
-fun Pane.codeEditor(textProperty: Property<String>) {
-    val codeArea = CodeEditor(textProperty)
-    add(codeArea)
+fun Pane.codeEditor(textProperty: Property<String>, setup: CodeEditor.() -> Unit = {}) {
+    val editor = CodeEditor(textProperty)
+    editor.setup()
+    add(editor)
 }
 
 /**

@@ -16,7 +16,11 @@
     });
 
     editor.on("change", editor => {
-       _fxTextPropertyBridge.setValue(editor.getValue());
+        try {
+            _fxTextPropertyBridge.onTextChanged(editor.getValue() || "");
+        } catch (err) {
+            console.log(err)
+        }
     });
 </script>
 </body>

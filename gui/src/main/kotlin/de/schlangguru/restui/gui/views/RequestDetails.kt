@@ -1,5 +1,6 @@
 package de.schlangguru.restui.gui.views
 
+import de.schlangguru.restui.gui.codeEditor
 import de.schlangguru.restui.gui.viewmodels.RequestHeaderViewModel
 import de.schlangguru.restui.gui.viewmodels.RequestViewModel
 import javafx.geometry.Insets
@@ -40,7 +41,7 @@ class RequestDetails : View() {
                     cellFragment(RequestHeaderCellFragment::class)
                 }
 
-                textarea(viewModel.entity) {
+                codeEditor(viewModel.entity) {
                     isEditable = false
                 }
             }
