@@ -1,8 +1,3 @@
-package de.schlangguru.restui.server
+package de.schlangguru.restui.app.server
 
-class ResponseSelectionException : RuntimeException {
-
-    constructor(message: String) : super(message)
-    constructor(message: String, cause: Throwable) : super(message, cause)
-
-}
+class ResponseSelectionException(message: String) : RuntimeException(message)

@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test
 import org.testfx.api.FxToolkit
 
 class MockResponseViewModelTest {
-    lateinit var viewModel: MockResponseViewModel
+    private lateinit var viewModel: MockResponseViewModel
 
     init {
         // Initilaize JavaFX

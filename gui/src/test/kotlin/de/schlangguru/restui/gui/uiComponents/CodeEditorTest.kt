@@ -12,8 +12,8 @@ import org.testfx.api.FxToolkit
 class CodeEditorTest {
 
     /** The js variable of the created editor. */
-    val editorDOM = "editor"
-    lateinit var fxRobot: FxRobot
+    private val editorDOM = "editor"
+    private lateinit var fxRobot: FxRobot
 
     init {
         // Initilaize JavaFX

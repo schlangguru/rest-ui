@@ -2,7 +2,6 @@ package de.schlangguru.restui.app.server
 
 import de.schlangguru.restui.app.model.MockResponse
 import de.schlangguru.restui.app.model.Request
-import de.schlangguru.restui.server.ResponseSelectionException
 
 /**
  * Returns the available responses in sequential order.

@@ -77,7 +77,7 @@ class MockResourceDetails : View() {
                             tooltip("Add")
                             imageview("/icons/plus.png")
                             action {
-                                prompt("${viewModel.path.value}", "Add Response", "Name:") {
+                                prompt(viewModel.path.value, "Add Response", "Name:") {
                                     viewModel.addResponse(it)
                                 }
                             }

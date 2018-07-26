@@ -4,6 +4,7 @@ import de.schlangguru.restui.gui.uiComponents.CodeEditor
 import javafx.beans.property.IntegerProperty
 import javafx.beans.property.Property
 import javafx.collections.FXCollections
+import javafx.collections.ObservableList
 import javafx.scene.control.ListView
 import javafx.scene.control.TextInputDialog
 import javafx.scene.layout.Pane
@@ -64,4 +65,4 @@ fun prompt(title: String = "",
 /**
  * Nullpointer save wrapper for [FXCollections.observableArrayList].
  */
-fun <E> observableList(collection: Collection<E>?) = FXCollections.observableArrayList(collection ?: emptyList())
+fun <E> observableList(collection: Collection<E>?): ObservableList<E> = FXCollections.observableArrayList(collection ?: emptyList())

@@ -24,7 +24,7 @@ class MainMenu: View() {
                     accelerator = KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN)
                     action {
                         val selectedFiles = chooseFile(mode = FileChooserMode.Save, filters = arrayOf(FileChooser.ExtensionFilter("XML files (*.xml)", "*.xml")))
-                        if (selectedFiles.size > 0) {
+                        if (selectedFiles.isNotEmpty()) {
                             viewModel.saveConfiguration(selectedFiles[0])
                         }
                     }
@@ -32,7 +32,7 @@ class MainMenu: View() {
                 item("Load Configuration...") {
                     action {
                         val selectedFiles = chooseFile(mode = FileChooserMode.Single, filters = arrayOf(FileChooser.ExtensionFilter("XML files (*.xml)", "*.xml")))
-                        if (selectedFiles.size > 0) {
+                        if (selectedFiles.isNotEmpty()) {
                             viewModel.loadConfiguration(selectedFiles[0])
                         }
                     }

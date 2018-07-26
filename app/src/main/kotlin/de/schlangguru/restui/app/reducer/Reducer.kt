@@ -1,6 +1,5 @@
 package de.schlangguru.restui.app.reducer
 
-import com.google.gson.Gson
 import com.thoughtworks.xstream.XStream
 import de.schlangguru.restui.app.AppState
 import de.schlangguru.restui.app.actions.*
@@ -39,7 +38,7 @@ class Reducer {
         )
     }
 
-    fun reduce(action: LoadStateAction, state: AppState): AppState {
+    fun reduce(action: LoadStateAction): AppState {
         val serializedState = File(action.filePath).readText()
         return XStream().fromXML(serializedState) as AppState
     }

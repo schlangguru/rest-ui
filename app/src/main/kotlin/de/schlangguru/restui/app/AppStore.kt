@@ -26,7 +26,7 @@ object AppStore: Store<AppState>(
             is AddMockResourceAction -> mainReducer.reduce(action, state)
             is RemoveMockResourceAction -> mainReducer.reduce(action, state)
             is UpdateMockResourceAction -> mainReducer.reduce(action, state)
-            is LoadStateAction -> mainReducer.reduce(action, state)
+            is LoadStateAction -> mainReducer.reduce(action)
             else -> state
         }
     }

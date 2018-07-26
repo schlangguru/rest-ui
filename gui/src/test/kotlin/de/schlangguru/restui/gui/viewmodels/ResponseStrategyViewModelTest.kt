@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test
 import org.testfx.api.FxToolkit
 
 class ResponseStrategyViewModelTest {
-    lateinit var viewModel: ResponseStrategyViewModel
+    private lateinit var viewModel: ResponseStrategyViewModel
 
     init {
         // Initilaize JavaFX

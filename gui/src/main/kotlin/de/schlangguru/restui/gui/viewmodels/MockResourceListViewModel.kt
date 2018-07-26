@@ -47,7 +47,7 @@ class MockResourceListViewModel(
             path = "/$path"
         }
 
-        val resource = MockResource(path = path, method = "GET", responseStrategy = SequentialResponseStrategy(), responses = emptyList<MockResponse>())
+        val resource = MockResource(path = path, method = "GET", responseStrategy = SequentialResponseStrategy(), responses = emptyList())
         store.dispatch(AddMockResourceAction(resource))
     }
 }

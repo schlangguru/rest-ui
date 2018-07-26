@@ -17,7 +17,7 @@ class ThemeStateHandler : StateHandler<AppState> {
     private val DARK_THEME = "/css/modena_dark.css"
 
     override fun handle(state: AppState) {
-        val useDarkTheme = state.useDarkTheme ?: false
+        val useDarkTheme = state.useDarkTheme
         if (useDarkTheme) {
             Platform.runLater { importStylesheet(DARK_THEME) }
         } else {

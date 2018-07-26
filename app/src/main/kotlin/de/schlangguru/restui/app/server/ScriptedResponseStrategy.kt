@@ -3,7 +3,6 @@ package de.schlangguru.restui.app.server
 import com.google.gson.Gson
 import de.schlangguru.restui.app.model.MockResponse
 import de.schlangguru.restui.app.model.Request
-import de.schlangguru.restui.server.ResponseSelectionException
 
 /**
  * Uses a script (JavaScript) provided by the user to determine the REST response.
