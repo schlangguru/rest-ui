@@ -4,7 +4,6 @@ import de.schlangguru.restui.app.model.MockResponse
 import de.schlangguru.restui.gui.FXApp
 import de.schlangguru.restui.gui.codeEditor
 import de.schlangguru.restui.gui.prompt
-import de.schlangguru.restui.gui.uiComponents.CodeEditor
 import de.schlangguru.restui.gui.viewmodels.MockResourceViewModel
 import de.schlangguru.restui.gui.viewmodels.MockResponseViewModel
 import de.schlangguru.restui.gui.viewmodels.ResponseStrategyViewModel
@@ -192,7 +191,7 @@ class ResponseStrategyEditor: Fragment() {
                         pane { hgrow = Priority.ALWAYS }
                         button {
                             tooltip("Help")
-                            imageview("/icons/undo.png")
+                            imageview("/icons/about.png")
                             action {
                                 dialog {
                                     webview {
