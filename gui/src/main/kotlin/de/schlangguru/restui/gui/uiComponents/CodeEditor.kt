@@ -1,15 +1,19 @@
 package de.schlangguru.restui.gui.uiComponents
 
+import com.sun.corba.se.spi.orbutil.threadpool.Work
 import com.sun.javafx.webkit.WebConsoleListener
 import javafx.beans.property.Property
+import javafx.beans.property.SimpleStringProperty
 import javafx.concurrent.Worker
 import javafx.scene.layout.StackPane
 import javafx.scene.web.WebEngine
 import javafx.scene.web.WebView
 import netscape.javascript.JSObject
 import org.apache.commons.text.StringEscapeUtils
+import tornadofx.awaitUntil
 import tornadofx.onChange
 import java.util.concurrent.CompletableFuture
+import kotlin.concurrent.thread
 
 
 /**
@@ -17,9 +21,10 @@ import java.util.concurrent.CompletableFuture
  * The code editor is based on [WebView] and the codemirror
  * project. See [codemirror.net](https://codemirror.net/).
  */
-class CodeEditor(textProperty: Property<String>) : StackPane() {
-    private val webview = WebView()
-    val webviewReadyFuture = CompletableFuture<Worker.State>()
+class CodeEditor(
+        textProperty: Property<String> = SimpleStringProperty(),
+        private val webview: WebView = WebView()
+) : StackPane() {
     private val htmlTemplate = "/codeEditor/template.html"
 
     private val jsInbound = JSInbound(textProperty)
@@ -31,29 +36,25 @@ class CodeEditor(textProperty: Property<String>) : StackPane() {
      * Default is `true`.
      */
     var isEditable: Boolean = true
-        set(value) = whenReady {
+        set(value) {
             val option = if (value) "false" else "'nocursor'"
             jsOutbound.setOption("readOnly", option)
             field = value
         }
 
     init {
-        setupReadyListener()
         setupWebView()
+        waitUntilWebviewReady()
         bindTextPropertyToJS(textProperty)
 
         children.add(webview)
-    }
-
-    private fun whenReady(block: () -> Unit) {
-        webviewReadyFuture.thenRun(block)
     }
 
     /**
      * Binds the [textProperty] to the content of the js code editor so
      * the the property will always reflect the contents of the editor.
      */
-    private fun bindTextPropertyToJS(textProperty: Property<String>) = whenReady {
+    private fun bindTextPropertyToJS(textProperty: Property<String>) {
         // editor change -> textproperty
         val windowDOM = webview.engine.executeScript("window") as JSObject
         windowDOM.setMember("_fxTextPropertyBridge", jsInbound)
@@ -82,11 +83,10 @@ class CodeEditor(textProperty: Property<String>) : StackPane() {
     /**
      * Blocks until the editor is loaded in the webview.
      */
-    private fun setupReadyListener() {
-        webview.engine.loadWorker.stateProperty().addListener { _, _, newValue: Worker.State ->
-            if (newValue == Worker.State.SUCCEEDED) {
-                webviewReadyFuture.complete(Worker.State.SUCCEEDED)
-            }
+    private fun waitUntilWebviewReady() {
+        val stateProperty = webview.engine.loadWorker.stateProperty()
+        stateProperty.awaitUntil { state ->
+            state == Worker.State.SUCCEEDED
         }
     }
 
