@@ -10,7 +10,12 @@ import de.schlangguru.restui.app.server.ScriptedResponseStrategy
 import de.schlangguru.restui.app.server.SequentialResponseStrategy
 import de.schlangguru.restui.gui.views.MainView
 import javafx.application.Application
+import javafx.scene.image.Image
+import javafx.stage.Stage
 import tornadofx.App
+import tornadofx.FX
+import tornadofx.addStageIcon
+import tornadofx.setStageIcon
 
 /**
  * Main Function to launch the application.
@@ -25,7 +30,9 @@ fun main(vararg args: String) {
 class FXApp: App(MainView::class) {
     private val store = AppStore
 
-    init {
+    override fun start(stage: Stage) {
+        super.start(stage)
+
         store.register(ThemeStateHandler())
         initRestServer()
         initTestData()
