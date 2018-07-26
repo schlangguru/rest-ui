@@ -6,7 +6,7 @@ With REST UI you can create mocked REST APIs and easily review the incoming requ
 
 ## Screenshots:
 
-| **Create mocked REST resources** | **Observe requests made to the mocked REST api** | Control which response to select with a simple script |
+| **Create mocked REST resources** | **Observe requests made to the mocked REST api** | **Select the response with a simple script** |
 | --- | --- | --- |
 | ![RequestsView](./screenshots/MockResources.png) | ![RequestsView](./screenshots/Requests.png) | ![RequestsView](./screenshots/Script.png) |
 
