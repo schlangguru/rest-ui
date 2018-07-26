@@ -4,6 +4,15 @@
 REST UI is a simple application to test REST Clients.
 With REST UI you can create mocked REST APIs and easily review the incoming requests.
 
+## Features:
+
+- Mock REST APIs
+- Create custom responses for your mocked API
+- Select between response strategies:
+    - *Sequential*: Each request will be answered with the next response in sequential order
+    - *Scripted*: Write a simple script that selects the appropriate response
+- Inspect the incoming requests (HTTP headers and body)
+
 ## Screenshots:
 
 | **Create mocked REST resources** | **Observe requests made to the mocked REST api** | **Select the response with a simple script** |
