@@ -11,6 +11,12 @@ data class AppState (
         val serverStatus: ServerStatus = ServerStatus.Stopped,
         val host: String = "localhost",
         val port: Int = 7777,
+
+        val useHTTPS: Boolean = false,
+        val keystorePath: String = "",
+        val keyPassword: String = "",
+        val storePassword: String = "",
+
         val useDarkTheme: Boolean = false,
 
         /** Stores all received requests. */

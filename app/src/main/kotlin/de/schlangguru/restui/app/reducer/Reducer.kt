@@ -16,7 +16,11 @@ class Reducer {
         return state.copy(
                 host = action.host ?: state.host,
                 port = action.port ?: state.port,
-                useDarkTheme = action.useDarkTheme ?: state.useDarkTheme
+                useDarkTheme = action.useDarkTheme ?: state.useDarkTheme,
+                useHTTPS = action.useHTTPS ?: state.useHTTPS,
+                keystorePath = action.keystorePath ?: state.keystorePath,
+                storePassword = action.storePassword ?: state.storePassword,
+                keyPassword = action.keyPassword ?: state.keyPassword
         )
     }
 

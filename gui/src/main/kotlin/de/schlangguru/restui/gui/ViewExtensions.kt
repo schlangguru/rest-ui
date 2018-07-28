@@ -3,15 +3,15 @@ package de.schlangguru.restui.gui
 import de.schlangguru.restui.gui.uiComponents.CodeEditor
 import javafx.beans.property.IntegerProperty
 import javafx.beans.property.Property
+import javafx.beans.property.SimpleBooleanProperty
 import javafx.collections.FXCollections
 import javafx.collections.ObservableList
 import javafx.scene.control.ListView
 import javafx.scene.control.TextInputDialog
+import javafx.scene.image.Image
 import javafx.scene.layout.Pane
 import javafx.stage.Window
-import tornadofx.FX
-import tornadofx.add
-import tornadofx.onChange
+import tornadofx.*
 
 fun <T> ListView<T>.bindSelectedIndexBidirectional(property: IntegerProperty) {
     selectionModel.selectedIndexProperty().onChange {
@@ -40,6 +40,34 @@ fun Pane.codeEditor(textProperty: Property<String>, setup: CodeEditor.() -> Unit
     val editor = CodeEditor(textProperty)
     editor.setup()
     add(editor)
+}
+
+/**
+ * Creates a password field that has a show/hide text button.
+ */
+fun Pane.passwordTextField(textProperty: Property<String>, showTextWhen: SimpleBooleanProperty) {
+    val eyeImage = Image(FXApp::class.java.getResource("/icons/eye.png").toExternalForm())
+    val eyeOffImage = Image(FXApp::class.java.getResource("/icons/eye-off.png").toExternalForm())
+    val imageBinding = showTextWhen.objectBinding {
+        if (it == true) eyeImage else eyeOffImage
+    }
+
+    passwordfield(textProperty) {
+        visibleWhen { showTextWhen.not() }
+        managedWhen  { showTextWhen.not() }
+    }
+    textfield(textProperty) {
+        visibleWhen { showTextWhen }
+        managedWhen  { showTextWhen }
+    }
+    button {
+        imageview() {
+            imageProperty().bind(imageBinding)
+        }
+        action {
+            showTextWhen.value = !showTextWhen.value
+        }
+    }
 }
 
 /**

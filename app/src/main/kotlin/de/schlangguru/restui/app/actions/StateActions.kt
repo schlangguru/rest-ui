@@ -28,7 +28,11 @@ class UpdateMockResourceAction (
 class UpdateSettingsAction (
         val host: String? = null,
         val port: Int? = null,
-        val useDarkTheme: Boolean? = null
+        val useDarkTheme: Boolean? = null,
+        val useHTTPS: Boolean? = null,
+        val keystorePath: String? = null,
+        val storePassword: String? = null,
+        val keyPassword: String? = null
 ): Action
 
 class LoadStateAction (

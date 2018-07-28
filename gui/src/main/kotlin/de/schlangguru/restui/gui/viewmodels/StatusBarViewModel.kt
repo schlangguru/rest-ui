@@ -16,7 +16,7 @@ class StatusBarViewModel(
     private val TEXT_STERVER_STARTED = "Server started: %s"
     private val TEXT_SERVER_STARTING = "Server starting..."
 
-    val statusText = SimpleStringProperty(this, "status_text", "")
+    val statusText = SimpleStringProperty( "")
 
     init {
         store.register(this)
@@ -32,9 +32,18 @@ class StatusBarViewModel(
     private fun upateServerStatus(serverStatus: ServerStatus?) {
         when (serverStatus) {
             ServerStatus.Stopped -> statusText.set(TEXT_SERVER_STOPPED)
-            ServerStatus.Started -> statusText.set(TEXT_STERVER_STARTED.format("${item?.host}:${item?.port}"))
+            ServerStatus.Started -> statusText.set(TEXT_STERVER_STARTED.format("${item?.host}:${item?.port} (${httpMode()})"))
             ServerStatus.Stopping -> statusText.set(TEXT_SERVER_STOPPING)
             ServerStatus.Starting -> statusText.set(TEXT_SERVER_STARTING)
+        }
+    }
+
+    private fun httpMode(): String {
+        val httpsEnabled = item?.useHTTPS ?: false
+        if (httpsEnabled) {
+            return "HTTPS"
+        } else {
+            return "HTTP"
         }
     }
 }

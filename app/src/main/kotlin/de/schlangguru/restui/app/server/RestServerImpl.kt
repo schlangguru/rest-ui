@@ -16,6 +16,9 @@ import org.glassfish.jersey.server.ResourceConfig
 import org.glassfish.jersey.server.model.Resource
 import java.io.IOException
 import java.net.URI
+import org.glassfish.grizzly.ssl.SSLContextConfigurator
+import org.glassfish.grizzly.ssl.SSLEngineConfigurator
+
 
 /**
  * Standard implementation of the REST server.
@@ -34,6 +37,11 @@ class RestServerImpl (
     private var port: Int = 8080
     /** The mocked REST resources of the server. */
     private var mockResources: List<MockResource> = emptyList()
+    /** Whether to to sue a secure connection. */
+    private var useHTTPS: Boolean = false
+    private var keystorePath: String = ""
+    private var keyPassword: String = ""
+    private var storePassword: String = ""
 
     init {
         store.register(this as SideEffect)
@@ -51,11 +59,21 @@ class RestServerImpl (
         host = state.host
         port = state.port
         mockResources = state.mockResources
+        useHTTPS = state.useHTTPS
+        keystorePath = state.keystorePath
+        keyPassword = state.keyPassword
+        storePassword = state.storePassword
     }
 
     override fun start(host: String, port: Int, mockResources: List<MockResource>) {
         try {
-            server = GrizzlyHttpServerFactory.createHttpServer(URI("http://$host:$port"), resourceConfig(mockResources), false)
+            val sslCon = SSLContextConfigurator()
+            sslCon.setKeyStoreFile(keystorePath)
+            sslCon.setKeyStorePass(storePassword)
+            sslCon.setKeyPass(keyPassword)
+            val ssLConfigurator = SSLEngineConfigurator(sslCon).setClientMode(false).setNeedClientAuth(false)
+
+            server = GrizzlyHttpServerFactory.createHttpServer(URI("https://$host:$port"), resourceConfig(mockResources), useHTTPS, ssLConfigurator)
             server?.start()
 
             store.dispatch(ServerStatusChangedAction(ServerStatus.Started))

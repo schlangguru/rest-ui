@@ -17,6 +17,12 @@ class SettingsViewModel (
     val serverHost: SimpleStringProperty = bind { item?.host.toProperty() }
     val serverPort: SimpleIntegerProperty = bind { SimpleIntegerProperty(item?.port ?: 0) }
     val useDarkTheme: SimpleBooleanProperty = bind { item?.useDarkTheme.toProperty() }
+    val useHTTPS: SimpleBooleanProperty = bind { item?.useHTTPS.toProperty() }
+    val keystorePath: SimpleStringProperty = bind { item?.keystorePath.toProperty() }
+    val storePassword: SimpleStringProperty = bind { item?.storePassword.toProperty() }
+    val showStorePassword = SimpleBooleanProperty(false)
+    val keyPassword: SimpleStringProperty = bind { item?.keyPassword.toProperty() }
+    val showKeyPassword = SimpleBooleanProperty(false)
 
     init {
         store.register(this)
@@ -29,6 +35,14 @@ class SettingsViewModel (
     }
 
     override fun onCommit() {
-        store.dispatch(UpdateSettingsAction(serverHost.value, serverPort.value, useDarkTheme.value))
+        store.dispatch(UpdateSettingsAction(
+                serverHost.value,
+                serverPort.value,
+                useDarkTheme.value,
+                useHTTPS.value,
+                keystorePath.value,
+                storePassword.value,
+                keyPassword.value
+        ))
     }
 }
