@@ -9,6 +9,23 @@
     <title>Hello, world!</title>
 </head>
 <body>
+<h1>Writing a response script</h1>
+The response script can control which response should be returned for a specific request.
+You can use any valid javascript for this purpose. The script must provide the name of the response you want to return.
+For example the simplest script would be:
+<pre>
+    "myResponse"
+</pre>
+to return the response with the name <code>myResponse</code> for every incoming request. A more interesting script could be
+something like this:
+<pre>
+    if (someCondition) {
+        "myMainResponse"
+    } else {
+        "myAlternativeResponse"
+    }
+</pre>
+You have access to the request in the script to build up more complex logic.
 
 <h1>Access the request</h1>
 <p>
@@ -42,15 +59,15 @@ You can print to the console (stdout) with the <code>print(obj)</code> funciton.
 print (JSON.stringify(_request))
 
 // Read the query parameter with the name "q"
-const queryParam = _request.queryParameter["q"]
+var queryParam = _request.queryParameter["q"]
 
 // Decide which response to use
 if (queryParam == "useMainResponse") {
     // Tell the engine to use response with name "first"
-    return "first"
+    "first"
 } else {
     // Tell the engine to use response with name "second"
-    return "second"
+    "second"
 }
 </pre>
 
