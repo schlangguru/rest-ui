@@ -12,6 +12,7 @@ With REST UI you can create mocked REST APIs and easily review the incoming requ
     - *Sequential*: Each request will be answered with the next response in sequential order
     - *Scripted*: Write a simple script that selects the appropriate response
 - Inspect the incoming requests (HTTP headers and body)
+- Supports HTTP and HTTPS
 
 ## Screenshots:
 
@@ -38,14 +39,7 @@ The architecture combines traditional MVVM with the ideas of Redux for unidirect
 
 The UI is based on the awesome [TornadoFX](https://github.com/edvin/tornadofx) framework.
 
-## Known Issues
-- ~~**Application does not exit correctly:** This is a problem most likely due to an async server stop during application shutdown.~~
-- **Docs:** KDoc is improvable.
-
 ## TODO:
-- [x] Make it possible to add new mock responses
-- [x] Implement save/load configuration
 - [ ] Allow files as response entity
-- [x] Add help for the scripted response strategy
-- [x] Allow HTTPS
-- [x] Implement generator for self signed certificates
+- [ ] Implement generator for self signed certificates
+- [ ] Use JavaFX´s web engine for the response scripts instead of nashorn engine. (Since nashorn does not support the latest ES standard)
