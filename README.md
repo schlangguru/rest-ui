@@ -48,4 +48,4 @@ The UI is based on the awesome [TornadoFX](https://github.com/edvin/tornadofx) f
 - [ ] Allow files as response entity
 - [x] Add help for the scripted response strategy
 - [x] Allow HTTPS
-- [x] Implement generation for self signed certificates
+- [x] Implement generator for self signed certificates
