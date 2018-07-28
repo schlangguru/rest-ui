@@ -35,7 +35,6 @@ class FXApp: App(MainView::class) {
 
         store.register(ThemeStateHandler())
         initRestServer()
-        initTestData()
     }
 
     /**
@@ -43,39 +42,6 @@ class FXApp: App(MainView::class) {
      */
     private fun initRestServer() {
         RestServerImpl()
-    }
-
-    /**
-     * TODO: has to be removed in prod.
-     * Initializes some testdata to play around during dev.
-     */
-    private fun initTestData() {
-        val textMockResource = MockResource(path = "/text", method = "GET", responseStrategy = SequentialResponseStrategy(), responses = listOf(
-                MockResponse("main", 200, "text/html", "GET ok"),
-                MockResponse("secondary", 204, "text/html", "")
-        ))
-
-        val jsonMockResource = MockResource(path = "/json", method = "GET", responseStrategy = SequentialResponseStrategy(), responses = listOf(
-                MockResponse("main", 200, "application/json", "{\"key\": \"value\"}")
-        ))
-
-        val postMockResource = MockResource(path = "/post", method = "POST", responseStrategy = SequentialResponseStrategy(), responses = listOf(
-                MockResponse("main", 200, "text/html", "POST ok")
-        ))
-
-        val script = """
-                print (JSON.stringify(_request))
-                _request.queryParameter["q"]
-            """.trimMargin().trimIndent()
-        val scriptedResponseResource = MockResource(path = "/script", method = "GET", responseStrategy = ScriptedResponseStrategy(script), responses = listOf(
-                MockResponse("main", 200, "text/html", "Proudly presented by script."),
-                MockResponse("secondary", 200, "text/html", "Proudly presented by script. (Secondary)")
-        ))
-
-        store.dispatch(AddMockResourceAction(textMockResource))
-        store.dispatch(AddMockResourceAction(jsonMockResource))
-        store.dispatch(AddMockResourceAction(postMockResource))
-        store.dispatch(AddMockResourceAction(scriptedResponseResource))
     }
 
     /**
