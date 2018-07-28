@@ -6,10 +6,12 @@ buildscript {
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath group: 'de.dynamicfiles.projects.gradle.plugins', name: 'javafx-gradle-plugin', version: '8.8.2'
     }
 }
 
 apply plugin: 'application'
+apply plugin: 'javafx-gradle-plugin'
 
 group 'de.schlangguru'
 version '1.0-SNAPSHOT'
@@ -44,3 +46,8 @@ dependencies {
     compile project(":gui")
 }
 
+jfx {
+    appName = "${rootProject.name}"
+    mainClass = "$mainClassName"
+    vendor = 'Sebastian Seidl'
+}
