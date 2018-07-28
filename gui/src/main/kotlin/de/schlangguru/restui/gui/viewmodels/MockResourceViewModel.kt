@@ -24,6 +24,7 @@ class MockResourceViewModel(
         private val store: AppStore = AppStore
 ): ItemViewModel<MockResource>() {
     private val mockResourceID = bind (MockResource::id)
+    val hasMockResource = bind { SimpleBooleanProperty(item != null) }
     val responseStrategy = bind (MockResource::responseStrategy)
     val path = bind (MockResource::path)
     val method = bind (MockResource::method)

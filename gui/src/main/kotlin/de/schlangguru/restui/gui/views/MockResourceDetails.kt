@@ -23,6 +23,7 @@ class MockResourceDetails : View() {
 
     init {
         with(root) {
+            enableWhen { viewModel.hasMockResource }
             toolbar {
                 pane {
                     hgrow = Priority.ALWAYS
