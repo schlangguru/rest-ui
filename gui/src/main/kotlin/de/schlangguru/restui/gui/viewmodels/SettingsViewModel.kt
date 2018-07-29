@@ -20,9 +20,7 @@ class SettingsViewModel (
     val useHTTPS: SimpleBooleanProperty = bind { item?.useHTTPS.toProperty() }
     val keystorePath: SimpleStringProperty = bind { item?.keystorePath.toProperty() }
     val storePassword: SimpleStringProperty = bind { item?.storePassword.toProperty() }
-    val showStorePassword = SimpleBooleanProperty(false)
     val keyPassword: SimpleStringProperty = bind { item?.keyPassword.toProperty() }
-    val showKeyPassword = SimpleBooleanProperty(false)
 
     init {
         store.register(this)

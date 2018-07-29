@@ -6,6 +6,7 @@ import javafx.beans.property.SimpleBooleanProperty
 import javafx.scene.layout.Priority
 import javafx.scene.layout.VBox
 import javafx.stage.FileChooser
+import javafx.stage.StageStyle
 import javafx.util.converter.NumberStringConverter
 import tornadofx.*
 
@@ -58,14 +59,19 @@ class SettingsView: View() {
                                 chooseJKS()
                             }
                         }
+                        button("Create JKS...") {
+                            action {
+                                find<CertificateGeneratorDialog>().openModal(StageStyle.UTILITY)
+                            }
+                        }
                     }
                     field("Keystore Password: ") {
                         enableWhen{ viewModel.useHTTPS }
-                        passwordTextField(viewModel.storePassword, viewModel.showStorePassword)
+                        passwordTextField(viewModel.storePassword)
                     }
                     field("Key Password: ") {
                         enableWhen{ viewModel.useHTTPS }
-                        passwordTextField(viewModel.keyPassword, viewModel.showKeyPassword)
+                        passwordTextField(viewModel.keyPassword)
                     }
                 }
 
