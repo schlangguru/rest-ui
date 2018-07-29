@@ -45,7 +45,7 @@ fun Pane.codeEditor(textProperty: Property<String>, setup: CodeEditor.() -> Unit
 /**
  * Creates a password field that has a show/hide text button.
  */
-fun Pane.passwordTextField(textProperty: Property<String>, showTextWhen: SimpleBooleanProperty) {
+fun Pane.passwordTextField(textProperty: Property<String>, showTextWhen: SimpleBooleanProperty = SimpleBooleanProperty()) {
     val eyeImage = Image(FXApp::class.java.getResource("/icons/eye.png").toExternalForm())
     val eyeOffImage = Image(FXApp::class.java.getResource("/icons/eye-off.png").toExternalForm())
     val imageBinding = showTextWhen.objectBinding {
