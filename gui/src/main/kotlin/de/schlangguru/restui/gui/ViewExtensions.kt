@@ -6,11 +6,11 @@ import javafx.beans.property.Property
 import javafx.beans.property.SimpleBooleanProperty
 import javafx.collections.FXCollections
 import javafx.collections.ObservableList
+import javafx.scene.control.Alert
 import javafx.scene.control.ListView
 import javafx.scene.control.TextInputDialog
 import javafx.scene.image.Image
 import javafx.scene.layout.Pane
-import javafx.stage.Window
 import tornadofx.*
 
 fun <T> ListView<T>.bindSelectedIndexBidirectional(property: IntegerProperty) {
@@ -78,7 +78,6 @@ fun Pane.passwordTextField(textProperty: Property<String>, showTextWhen: SimpleB
 fun prompt(title: String = "",
            header: String = "",
            content: String = "",
-           owner: Window? = null,
            onOk: (String) -> Unit = {}) {
 
     val dialog = TextInputDialog()
@@ -88,6 +87,27 @@ fun prompt(title: String = "",
 
     val result = dialog.showAndWait()
     result.ifPresent { onOk(it) }
+}
+
+/**
+ * Opens an error dialog that shows a error [message]
+ * and its [details] in the expandable area.
+ */
+fun errorDialog(message: String, details: String) {
+    val dialog = Alert(Alert.AlertType.ERROR)
+    with (dialog) {
+        dialog.title = "Error"
+        dialog.headerText = message
+
+        dialogPane.expandableContent = textarea(details) {
+            isEditable = false
+            isWrapText = true
+        }
+
+        dialogPane.isExpanded = true
+    }
+
+    dialog.showAndWait()
 }
 
 /**

@@ -15,3 +15,8 @@ class GenerateCertificateAction (
         val keyStorePath: String,
         val certInfo: CertificateInfo
 ) : Action
+
+class ErrorMessageAction (
+        val errorMessage: String,
+        val errorDetails: String = ""
+) : Action

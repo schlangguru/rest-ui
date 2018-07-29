@@ -17,7 +17,7 @@ object AppStore: Store<AppState>(
 
     init {
         register(PersistStateSideEffect(this))
-        register(CertificateGenerator())
+        register(CertificateGenerator(this))
     }
 
     override fun reduce(action: Action, state: AppState): AppState {

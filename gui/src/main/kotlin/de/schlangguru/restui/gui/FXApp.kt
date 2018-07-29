@@ -8,6 +8,7 @@ import de.schlangguru.restui.app.model.MockResponse
 import de.schlangguru.restui.app.server.RestServerImpl
 import de.schlangguru.restui.app.server.ScriptedResponseStrategy
 import de.schlangguru.restui.app.server.SequentialResponseStrategy
+import de.schlangguru.restui.gui.sideeffects.ErrorMessageHandler
 import de.schlangguru.restui.gui.views.MainView
 import javafx.application.Application
 import javafx.scene.image.Image
@@ -34,6 +35,7 @@ class FXApp: App(MainView::class) {
         super.start(stage)
 
         store.register(ThemeStateHandler())
+        store.register(ErrorMessageHandler())
         initRestServer()
     }
 
