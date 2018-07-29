@@ -2,6 +2,7 @@ package de.schlangguru.restui.app
 
 import de.schlangguru.restui.app.actions.*
 import de.schlangguru.restui.app.reducer.Reducer
+import de.schlangguru.restui.app.sideeffects.CertificateGenerator
 import de.schlangguru.restui.app.sideeffects.PersistStateSideEffect
 import de.schlangguru.restui.core.Action
 import de.schlangguru.restui.core.Store
@@ -16,6 +17,7 @@ object AppStore: Store<AppState>(
 
     init {
         register(PersistStateSideEffect(this))
+        register(CertificateGenerator())
     }
 
     override fun reduce(action: Action, state: AppState): AppState {
