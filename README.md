@@ -13,6 +13,7 @@ With REST UI you can create mocked REST APIs and easily review the incoming requ
     - *Scripted*: Write a simple script that selects the appropriate response
 - Inspect the incoming requests (HTTP headers and body)
 - Supports HTTP and HTTPS
+- Generate self signed certificates
 
 ## Screenshots:
 
@@ -41,5 +42,4 @@ The UI is based on the awesome [TornadoFX](https://github.com/edvin/tornadofx) f
 
 ## TODO:
 - [ ] Allow files as response entity
-- [ ] Implement generator for self signed certificates
 - [ ] Use JavaFX´s web engine for the response scripts instead of nashorn engine. (Since nashorn does not support the latest ES standard)
