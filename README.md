@@ -1,4 +1,4 @@
-# REST UI ![Travis CI - Status](https://travis-ci.org/Schlangguru/rest-ui.svg?branch=master)
+# REST UI ![Travis CI - Status](https://travis-ci.org/sebastianseidl/rest-ui.svg?branch=master)
 > REST UI is "Work in Progress"
 
 REST UI is a simple application to test REST Clients.
