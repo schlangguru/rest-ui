@@ -1,4 +1,4 @@
-# REST UI ![Travis CI - Status](https://travis-ci.org/sebastianseidl/rest-ui.svg?branch=master)
+# REST UI ![Travis CI - Status](https://travis-ci.org/schlangguru/rest-ui.svg?branch=master)
 
 REST UI is a simple application to test REST Clients.
 With REST UI you can create mocked REST APIs and easily review the incoming requests.
