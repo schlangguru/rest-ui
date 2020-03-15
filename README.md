@@ -39,6 +39,3 @@ The architecture combines traditional MVVM with the ideas of Redux for unidirect
 
 The UI is based on the awesome [TornadoFX](https://github.com/edvin/tornadofx) framework.
 
-## TODO:
-- [ ] Allow files as response entity
-- [ ] ~~Use JavaFX´s web engine for the response scripts instead of nashorn engine. (Since nashorn does not support the latest ES standard)~~
